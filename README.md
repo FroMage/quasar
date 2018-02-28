@@ -9,11 +9,6 @@ Add the following Maven/Gradle dependencies:
 | Feature          | Artifact
 |------------------|------------------
 | Core (required)  | `co.paralleluniverse:quasar-core:0.7.9[:jdk8]` (for JDK 8 optionally add the `jdk8` classifier)
-| Actors           | `co.paralleluniverse:quasar-actors:0.7.9`
-| Clustering       | `co.paralleluniverse:quasar-galaxy:0.7.9`
-| Reactive Streams | `co.paralleluniverse:quasar-reactive-streams:0.7.9`
-| Disruptor Channels| `co.paralleluniverse:quasar-disruptor:0.7.9`
-| Kotlin (JDK8+)   | `co.paralleluniverse:quasar-kotlin:0.7.9`
 
 Or, build from sources by running:
 
