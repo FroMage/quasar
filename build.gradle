@@ -74,7 +74,6 @@ subprojects {
     configurations {
         compileOnly
         provided
-        timewarp
         // markdownDoclet
     }
 
@@ -105,8 +104,6 @@ subprojects {
         }
         provided "org.apache.ant:ant:1.9.9" // version 1.10 and upwards requires JDK 8
         compile "com.google.guava:guava:20.0" // version 21.0 and upwards requires JDK 8
-        timewarp 'co.paralleluniverse:timewarp:0.1.0-SNAPSHOT'
-        testCompile 'co.paralleluniverse:timewarp:0.1.0-SNAPSHOT'
         testCompile 'junit:junit:4.12'
         testCompile('com.google.truth:truth:0.34') {
             exclude group: 'com.google.guava', module: 'guava'
@@ -161,13 +158,6 @@ subprojects {
 
         if (project.name != 'quasar-core') {
             jvmArgs "-javaagent:${quasarJar}" // =vdmc (verbose, debug, allow monitors, check class)
-        }
-
-        if (project.name != 'quasar-kotlin') { // TODO investigate why kotlin-plugin 1.1.2+ doesn't like it
-            jvmArgs "-Xbootclasspath/a:${configurations.timewarp.singleFile}"
-            if (System.getenv("TRAVIS") == 'true') {
-                jvmArgs "-javaagent:${configurations.timewarp.singleFile}=3" // slow clock down x3
-            }
         }
 
         jvmArgs "-Xmx2048m"
