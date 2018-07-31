@@ -14,8 +14,8 @@ ext.java8 = gradle.ext.java8 // See settings.gradle
 subprojects {
     apply plugin: 'java'
 
-    sourceCompatibility = '1.7'
-    targetCompatibility = '1.7'
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
 
     tasks.withType(JavaCompile) {
         options.encoding = 'UTF-8'
@@ -37,8 +37,8 @@ subprojects {
     ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
     ext.baselib         = "${rootProject.projectDir}/baselib"
     ext.java8 = rootProject.ext.java8
-    ext.jdkVer = ext.java8 ? "8" : "7"
-    ext.quasarJar = "${rootProject.projectDir}/quasar-core/build/libs/quasar-core-${version}${ext.java8 ? "-jdk8" : ""}.jar" // project(':quasar-core').jar.archivePath
+    ext.jdkVer = "8"
+    ext.quasarJar = "${rootProject.projectDir}/quasar-core/build/libs/quasar-core-${version}.jar" // project(':quasar-core').jar.archivePath
 
     ext.asmVer    = '6.0'
 
@@ -209,7 +209,7 @@ subprojects {
     debug.debug = true
 
     project.afterEvaluate {
-        run.dependsOn project(':quasar-core').tasks["jdk${project.ext.jdkVer}ShadowJar"]
+        run.dependsOn project(':quasar-core').tasks["jdk8ShadowJar"]
     }
 
     tasks.withType(JavaExec) {
@@ -226,9 +226,7 @@ subprojects {
             // docletpath = configurations.markdownDoclet.files.asType(List)
             // doclet = 'ch.raffael.doclets.pegdown.PegdownDoclet'
             // addStringOption("parse-timeout", "10")
-            if(project.ext.java8) {
-                options.addStringOption('Xdoclint:none', '-quiet')
-            }
+            options.addStringOption('Xdoclint:none', '-quiet')
             // stylesheetFile = rootProject.file('./baselib/javadoc.css')
             links = [
                 "http://docs.oracle.com/javase/7/docs/api/",
@@ -236,7 +234,6 @@ subprojects {
             ]
         }
     }
-
     defaultTasks 'build'
 
     task sourcesJar(type: Jar, dependsOn: classes) {
@@ -369,27 +366,8 @@ project (':quasar-core') {
         main {
             java {
                 srcDir 'src/main/java'
-                srcDir 'src/jdk7/java'
+                srcDir 'src/jdk8/java'
             }
-        }
-
-        jdk7 {
-            java {
-                srcDir 'src/main/java'
-                srcDir 'src/jdk7/java'
-            }
-
-            compileClasspath += main.compileClasspath // += main.uoutput
-            runtimeClasspath += main.runtimeClasspath // += main.uoutput
-        }
-
-        jdk7test {
-            java {
-                srcDir 'src/test/java'
-            }
-
-            compileClasspath += jdk7.output + test.compileClasspath
-            runtimeClasspath += compileClasspath  + test.runtimeClasspath
         }
 
         jdk8 {
@@ -426,18 +404,16 @@ project (':quasar-core') {
                 srcDir 'src/classloadertest/java'
             }
 
-            compileClasspath += jdk7.output + test.compileClasspath
+            compileClasspath += jdk8.output + test.compileClasspath
             runtimeClasspath += compileClasspath + test.runtimeClasspath
         }
     }
 
     configurations {
-        jdk7Archives.extendsFrom runtime
         jdk8Archives.extendsFrom runtime
     }
 
     dependencies {
-        jdk7Compile ":jsr166e"
         compile ":high-scale-lib"
         compile "org.hdrhistogram:HdrHistogram:2.1.9"
         compile("org.latencyutils:LatencyUtils:2.0.3") {
@@ -459,10 +435,7 @@ project (':quasar-core') {
         provided 'junit:junit:4.12'
     }
 
-    def ssets = [sourceSets.jdk7]
-    if(ext.java8) {
-        ssets += sourceSets.jdk8
-    }
+    def ssets = [sourceSets.jdk8]
 
     ssets.each { set ->
         configure(project.tasks["compile${capitalize(set.name)}Java"]) {
@@ -518,66 +491,35 @@ project (':quasar-core') {
         check.dependsOn testTask
     }
 
-    compileJdk7Java {
-        sourceCompatibility = '1.7'
-        targetCompatibility = '1.7'
+    compileJdk8Java {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
     }
 
-    //    jdk7Jar {
-    //        from zipTree("${baselib}/jsr166e.jar")  // include non-Maven jars
-    //    }
+    compileJdk8testJava {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 
-    jdk7ShadowJar {
-        dependencies {
-            include(dependency(':jsr166e'))
-        }
+    //        jdk8Jar {
+    //            classifier = 'jdk8'
+    //        }
+
+    jdk8ShadowJar {
     }
 
     artifacts {
-        jdk7Archives jdk7ShadowJar
+        jdk8Archives jdk8ShadowJar
     }
 
-    if (ext.java8) {
-        compileJdk8Java {
-            sourceCompatibility = '1.8'
-            targetCompatibility = '1.8'
-        }
-
-        compileJdk8testJava {
-            sourceCompatibility = '1.8'
-            targetCompatibility = '1.8'
-        }
-
-        //        jdk8Jar {
-        //            classifier = 'jdk8'
-        //        }
-
-        jdk8ShadowJar {
-            classifier = 'jdk8'
-        }
-
-        artifacts {
-            jdk8Archives jdk8ShadowJar
-        }
-
-        tasks.withType(JavaExec) {
-            classpath += sourceSets.jdk8test.runtimeClasspath + sourceSets.jdk8test.output
-        }
-        run.dependsOn compileJdk8Java, jdk8testClasses
-    } else {
-        tasks.withType(JavaExec) {
-            classpath += sourceSets.jdk7test.runtimeClasspath + sourceSets.jdk7test.output
-        }
-        run.dependsOn compileJdk7Java, jdk7testClasses
+    tasks.withType(JavaExec) {
+        classpath += sourceSets.jdk8test.runtimeClasspath + sourceSets.jdk8test.output
     }
+    run.dependsOn compileJdk8Java, jdk8testClasses
 
     javadoc {
         options.encoding = 'UTF-8'
-        if (project.ext.java8) {
-            source = sourceSets.jdk8.allJava
-        } else {
-            source = sourceSets.jdk7.allJava
-        }
+        source = sourceSets.jdk8.allJava
     }
 
     task shadowJar(dependsOn: tasks.withType(com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar), overwrite: true) {
@@ -612,11 +554,7 @@ task javadoc(type: Javadoc, dependsOn: subprojects.javadoc) {
     title = "Quasar ${project(':quasar-core').version}"
     destinationDir = file("docs/javadoc")
 
-    if (project.ext.java8) {
-        source = project(':quasar-core').sourceSets.jdk8.allJava
-    } else {
-        source = project(':quasar-core').sourceSets.jdk7.allJava
-    }
+    source = project(':quasar-core').sourceSets.jdk8.allJava
 
     classpath = files(subprojects.collect { project -> project.sourceSets.main.compileClasspath })
     options {
