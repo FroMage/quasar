@@ -8,7 +8,7 @@ Add the following Maven/Gradle dependencies:
 
 | Feature          | Artifact
 |------------------|------------------
-| Core (required)  | `co.paralleluniverse:quasar-core:0.7.9[:jdk8]` (for JDK 8 optionally add the `jdk8` classifier)
+| Core (required)  | `com.github.fromage.quasi:quasar-core:0.7.9[:jdk8]` (for JDK 8 optionally add the `jdk8` classifier)
 
 Or, build from sources by running:
 

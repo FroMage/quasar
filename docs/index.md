@@ -119,11 +119,11 @@ Add the following Maven/Gradle dependencies:
 
 | Feature          | Artifact
 |------------------|------------------
-| Core (required)  | `co.paralleluniverse:quasar-core:{{site.version}}[:jdk8]` (for JDK 8 optionally add the `jdk8` classifier)
-| Actors           | `co.paralleluniverse:quasar-actors:{{site.version}}`
-| Clustering       | `co.paralleluniverse:quasar-galaxy:{{site.version}}`
-| Reactive Streams | `co.paralleluniverse:quasar-reactive-streams:{{site.version}}`
-| Kotlin (JDK8+)   | `co.paralleluniverse:quasar-kotlin:{{site.version}}`
+| Core (required)  | `com.github.fromage.quasi:quasar-core:{{site.version}}[:jdk8]` (for JDK 8 optionally add the `jdk8` classifier)
+| Actors           | `com.github.fromage.quasi:quasar-actors:{{site.version}}`
+| Clustering       | `com.github.fromage.quasi:quasar-galaxy:{{site.version}}`
+| Reactive Streams | `com.github.fromage.quasi:quasar-reactive-streams:{{site.version}}`
+| Kotlin (JDK8+)   | `com.github.fromage.quasi:quasar-kotlin:{{site.version}}`
 
 
 ### Instrumenting Your Code {#instrumentation}
@@ -178,10 +178,10 @@ For example, if you want to configure a maven exec task you could add the follow
           <executable>java</executable>
           <arguments>
             <!-- Turn off before production -->
-            <argument>-Dco.paralleluniverse.fibers.verifyInstrumentation=true</argument>
+            <argument>-Dcom.github.fromage.quasi.fibers.verifyInstrumentation=true</argument>
 
             <!-- Quasar Agent -->
-            <argument>-javaagent:${co.paralleluniverse:quasar-core:jar}</argument>
+            <argument>-javaagent:${com.github.fromage.quasi:quasar-core:jar}</argument>
 
             <!-- Classpath -->
             <argument>-classpath</argument> <classpath/>
@@ -201,10 +201,10 @@ To have the agent running during tests you could also add:
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.9</version>
         <configuration>
-          <argLine>-Dco.paralleluniverse.fibers.verifyInstrumentation=true</argLine>
+          <argLine>-Dcom.github.fromage.quasi.fibers.verifyInstrumentation=true</argLine>
 
           <!-- Quasar Agent -->
-          <argLine>-javaagent:${co.paralleluniverse:quasar-core:jar}</argLine>
+          <argLine>-javaagent:${com.github.fromage.quasi:quasar-core:jar}</argLine>
         </configuration>
       </plugin>
 ~~~
@@ -227,7 +227,7 @@ In your dependencies block, add:
 ~~~ groovy
 dependencies {
     // ....
-    quasar  "co.paralleluniverse:quasar-core:{{site.version}}"
+    quasar  "com.github.fromage.quasi:quasar-core:{{site.version}}"
 }
 ~~~
 
@@ -243,7 +243,7 @@ A [Quasar Gradle template project](https://github.com/puniverse/quasar-gradle-te
 
 The easy and preferable way to instrument programs using Quasar is with the Java agent, which instruments code at runtime. Sometimes, however, running a Java agent is not an option.
 
-Quasar supports AOT instrumentation with an Ant task. The task is `co.paralleluniverse.fibers.instrument.InstrumentationTask` found in `quasar-core.jar`, and it accepts a fileset of classes to instrument. Not all classes will actually be instrumented – only those with suspendable methods (see below) – so simply give the task all of the class files in your program. In fact, Quasar itself is instrumented ahead-of-time.
+Quasar supports AOT instrumentation with an Ant task. The task is `com.github.fromage.quasi.fibers.instrument.InstrumentationTask` found in `quasar-core.jar`, and it accepts a fileset of classes to instrument. Not all classes will actually be instrumented – only those with suspendable methods (see below) – so simply give the task all of the class files in your program. In fact, Quasar itself is instrumented ahead-of-time.
 
 ### Building Quasar {#build}
 
@@ -300,7 +300,7 @@ You can join a fiber much as you'd do a thread with the `join` method. To obtain
 
 Other than `Fiber`'s constructor and `start` method, and possibly the `join` and `get` methods, you will not access the `Fiber` class directly much. To perform operations you would normally want to do on a thread, it is better to use the `Strand` class (discussed later), which is a generalizations of both threads and fibers.
 
-When using Kotlin the `fiber` syntax in `co.paralleluniverse.kotlin` makes it even easier:
+When using Kotlin the `fiber` syntax in `com.github.fromage.quasi.kotlin` makes it even easier:
 
 ~~~ kotlin
 fiber @Suspendable {
@@ -314,7 +314,7 @@ Fibers are scheduled by a [`FiberScheduler`]({{javadoc}}/fibers/FiberScheduler.h
 
 The default scheduler is an instance of [`FiberForkJoinScheduler`]({{javadoc}}/fibers/FiberForkJoinScheduler.html) which schedules fibers in a `ForkJoinPool`. This is a high-quality work-stealing scheduler, but sometimes you might want to schedule fibers in a thread pool of your own design or even on a particular thread (e.g. AWT/Swing's EDT). To that purpose you can use [`FiberExecutorScheduler`]({{javadoc}}/fibers/FiberExecutorScheduler.html). See [the Javadoc]({{javadoc}}/fibers/FiberExecutorScheduler.html) for details.
 
-Every scheduler creates a [MXBean]({{javadoc}}/fibers/FibersMXBean.html) that monitors the fibers scheduled by that scheduler. The MXBean's name is `"co.paralleluniverse:type=Fibers,name=SCHEDULER_NAME"`, and you can find more details in the [Javadoc]({{javadoc}}/fibers/FibersMXBean.html).
+Every scheduler creates a [MXBean]({{javadoc}}/fibers/FibersMXBean.html) that monitors the fibers scheduled by that scheduler. The MXBean's name is `"com.github.fromage.quasi:type=Fibers,name=SCHEDULER_NAME"`, and you can find more details in the [Javadoc]({{javadoc}}/fibers/FibersMXBean.html).
 
 ### Runaway Fibers {#runaway-fibers}
 
@@ -322,7 +322,7 @@ A fiber that is stuck in a loop without blocking, or is blocking the thread its 
 
 Note that this condition might happen when classes are encountered for the first time and need to be loaded from disk. This is alright because this happens only sporadically, but you may notice reports about problematic fibers during startup, as this when most class loading usually occurs.
 
-If you wish to turn off runaway fiber detection, set the `co.paralleluniverse.fibers.detectRunawayFibers` system property to `"false"`.
+If you wish to turn off runaway fiber detection, set the `com.github.fromage.quasi.fibers.detectRunawayFibers` system property to `"false"`.
 
 ### "ThreadLocal"s in Fibers {#fiberlocals}
 
@@ -439,11 +439,11 @@ So far, our way to specify a suspendable method is by declaring `throws SuspendE
 
 Sometimes, however, we cannot declare `f` to throw `SuspendExecution`. One example is that `f` is an implementation of an interface method, and we cannot (or don't want to) change the interface so that it throws `SuspendExecution`. It is also possible that we want `f` to be run in regular threads as well as fibers.
 
-An example for that are the synchronization primitives in the `co.paralleluniverse.strands.concurrent` package, which implement interfaces declared in `java.util.concurrent`, and we want to maintain compatibility. Also, no harm will come if we use these classes in regular threads. They will work just as well for threads as for fibers, because internally they call `Strand.park` which is fiber-blocking (suspends) if run in a fiber, but simply blocks the thread if not.
+An example for that are the synchronization primitives in the `com.github.fromage.quasi.strands.concurrent` package, which implement interfaces declared in `java.util.concurrent`, and we want to maintain compatibility. Also, no harm will come if we use these classes in regular threads. They will work just as well for threads as for fibers, because internally they call `Strand.park` which is fiber-blocking (suspends) if run in a fiber, but simply blocks the thread if not.
 
 So, suppose method `f` is declared in interface `I`, and we'd like to make its implementation in class `C` suspendable. The compiler will not let us declare that we throw `SuspendExecution` because that will conflict with `f`'s declaration in `I`.
 
-What we do, then, is annotate `C.f` with the `@Suspendable` annotation (in the `co.paralleluniverse.fibers` package). Assuming `C.f` calls `park` or some other suspendable method `g` – which does declare `throws SuspendExecution`, we need to surround `f`'s body with `try {} catch(SuspendExecution)` just so the method will compile, like so:
+What we do, then, is annotate `C.f` with the `@Suspendable` annotation (in the `com.github.fromage.quasi.fibers` package). Assuming `C.f` calls `park` or some other suspendable method `g` – which does declare `throws SuspendExecution`, we need to surround `f`'s body with `try {} catch(SuspendExecution)` just so the method will compile, like so:
 
 ~~~ java
 class C implements I {
@@ -474,10 +474,10 @@ First, if we want to run `h` in a fiber, then it must be suspendable because it 
 
 When `h` is encountered by the instrumentation module, it will be instrumented because it's marked suspendable, but in order for the instrumentation to work, it needs to know of `h`'s calls to other instrumented methods. `h` calls `f`, which is suspendable, but through its interface `I`, while we've only annotated `f`'s *implementation* in class C. The instrumenter does not know that `I.f` has an implementation that might suspend.
 
-Therefore, if you'd like to use the `@Suspendable` annotation, there's a step to be added to your build step, after compilation and before creating the jar file: running the `co.paralleluniverse.fibers.instrument.SuspendablesScanner` Ant task. In Gradle it looks like this:
+Therefore, if you'd like to use the `@Suspendable` annotation, there's a step to be added to your build step, after compilation and before creating the jar file: running the `com.github.fromage.quasi.fibers.instrument.SuspendablesScanner` Ant task. In Gradle it looks like this:
 
 ~~~ groovy
-ant.taskdef(name:'scanSuspendables', classname:'co.paralleluniverse.fibers.instrument.SuspendablesScanner',
+ant.taskdef(name:'scanSuspendables', classname:'com.github.fromage.quasi.fibers.instrument.SuspendablesScanner',
     classpath: "build/classes/main:build/resources/main:${configurations.runtime.asPath}")
 ant.scanSuspendables(
     auto: false,
@@ -502,7 +502,7 @@ Of course if you don't want to use `SuspendablesScanner` you can also add entrie
 Quasar supports automatic detection of suspendable methods, without manually marking them at all. The build-time `SuspendableScanner` ant task can be configured to automatically find suspendable methods by analyzing the call graph:
 
 ~~~ groovy
-ant.taskdef(name:'scanSuspendables', classname:'co.paralleluniverse.fibers.instrument.SuspendablesScanner',
+ant.taskdef(name:'scanSuspendables', classname:'com.github.fromage.quasi.fibers.instrument.SuspendablesScanner',
     classpath: "build/classes/main:build/resources/main:${configurations.runtime.asPath}")
 ant.scanSuspendables(
     auto: true,
@@ -520,9 +520,9 @@ Automatic detection of suspendable methods is currently a build-time static anal
 
 ### Fiber Serialization {#fiber-serialization}
 
-Fibers can be serialized while parked, and then deserialized an unparked to continue where they left off. The [`parkAndSerialize` method]({{javadoc}}/fibers/Fiber.html#parkAndSerialize(co.paralleluniverse.fibers.FiberWriter)) parks the currently running fiber, and then calls the passed callback, which can serialize the fiber (or any object graph containing the fiber) into a byte array using the supplied serializer.
+Fibers can be serialized while parked, and then deserialized an unparked to continue where they left off. The [`parkAndSerialize` method]({{javadoc}}/fibers/Fiber.html#parkAndSerialize(com.github.fromage.quasi.fibers.FiberWriter)) parks the currently running fiber, and then calls the passed callback, which can serialize the fiber (or any object graph containing the fiber) into a byte array using the supplied serializer.
 
-The [`unparkSerialized` method]({{javadoc}}/fibers//Fiber.html#unparkSerialized(byte[], co.paralleluniverse.fibers.FiberScheduler)) deserializes the serialized representation of the fiber, and unparks it. You can deserialize the byte array using the serializer returned from the [`getFiberSerializer` method]({{javadoc}}/fibers/Fiber.html#getFiberSerializer()), and pass the (uninitialized, unparked) deserialized fiber to the [`unparkDeserialized` method]({{javadoc}}/fibers/Fiber.html#unparkDeserialized(co.paralleluniverse.fibers.Fiber, co.paralleluniverse.fibers.FiberScheduler)). The latter approach is necessary if the serialized fiber is part of a bigger object graph serialized in the byte array.
+The [`unparkSerialized` method]({{javadoc}}/fibers//Fiber.html#unparkSerialized(byte[], com.github.fromage.quasi.fibers.FiberScheduler)) deserializes the serialized representation of the fiber, and unparks it. You can deserialize the byte array using the serializer returned from the [`getFiberSerializer` method]({{javadoc}}/fibers/Fiber.html#getFiberSerializer()), and pass the (uninitialized, unparked) deserialized fiber to the [`unparkDeserialized` method]({{javadoc}}/fibers/Fiber.html#unparkDeserialized(com.github.fromage.quasi.fibers.Fiber, com.github.fromage.quasi.fibers.FiberScheduler)). The latter approach is necessary if the serialized fiber is part of a bigger object graph serialized in the byte array.
 
 ### Suspendables in Libraries {#suspendable-libreries}
 
@@ -534,7 +534,7 @@ All entries should have the form "full.class.name.methodName" and `*` glob patte
 
 `SuspendablesScanner` will automatically add your entries to its output.
 
-Methods in the `java.lang` package are dealt with by Quasar internals and it's not possible to mark them as suspendable in any way. Other JDK methods can be made explicitly suspendable by listing them in the `META-INF/suspendables` and `META-INF/suspendable-supers` resources _and_ by setting the `co.paralleluniverse.fibers.allowJdkInstrumentation` system property to `true` but there should rarely be, if ever, a need to do so. If you think you need it we suggest you first [get in touch](#getting-help) and discuss your case.
+Methods in the `java.lang` package are dealt with by Quasar internals and it's not possible to mark them as suspendable in any way. Other JDK methods can be made explicitly suspendable by listing them in the `META-INF/suspendables` and `META-INF/suspendable-supers` resources _and_ by setting the `com.github.fromage.quasi.fibers.allowJdkInstrumentation` system property to `true` but there should rarely be, if ever, a need to do so. If you think you need it we suggest you first [get in touch](#getting-help) and discuss your case.
 
 ### Troubleshooting Intro {#troubleshooting}
 
@@ -551,7 +551,7 @@ Luckily Quasar also provides a lot of troubleshooting tools that can be enabled 
 
 Troubleshooting incomplete instrumentation requires the source code involved in the instrumentation issue, enabling instrumentation verification and, in few cases, enabling instrumentation traces.
 
-First set the value of the `co.paralleluniverse.fibers.verifyInstrumentation` system property to `true` and run your program. This will verify that all of your potentially suspendable calls in your suspendable-marked methods are properly instrumented, else a warning will be printed to the console letting you know which weren't.
+First set the value of the `com.github.fromage.quasi.fibers.verifyInstrumentation` system property to `true` and run your program. This will verify that all of your potentially suspendable calls in your suspendable-marked methods are properly instrumented, else a warning will be printed to the console letting you know which weren't.
 
 {:.alert .alert-warn}
 **Note:** do not turn on `verifyInstrumentation` in production, as it will slow down your code considerably: a warning will be printed whe the application starts in order to remind you of that.
@@ -640,11 +640,11 @@ When you run the program it just seems to get stuck, so let's see if there are i
 Quasar will alert you very soon after the application starts (on `stderr`) that some methods that can't be instrumented:
 
 ~~~
-co.paralleluniverse.fibers.instrument.UnableToInstrumentException:
+com.github.fromage.quasi.fibers.instrument.UnableToInstrumentException:
          Unable to instrument test/troubleshooting/Program#<init>()V
          because of special method
 ...
-co.paralleluniverse.fibers.instrument.UnableToInstrumentException:
+com.github.fromage.quasi.fibers.instrument.UnableToInstrumentException:
          Unable to instrument test/troubleshooting/Program$Commands#myMarkedSyncMethod()V
          because of synchronization
 ~~~
@@ -662,20 +662,20 @@ o.paralleluniverse.fibers.instrument.UnableToInstrumentException:
 
 We'll solve this further problem by Using `Strand.sleep` instead, which works for both fibers and threads (another option is telling Quasar to instrument anyway via the `b` agent argument but do that only if you're sure that the thread will block for a very short time).
 
-When we run again there are no message errors but the program still hangs, so it's time to turn on instrumentation verification by adding the `-Dco.paralleluniverse.fibers.verifyInstrumentation=true` command line option.
+When we run again there are no message errors but the program still hangs, so it's time to turn on instrumentation verification by adding the `-Dcom.github.fromage.quasi.fibers.verifyInstrumentation=true` command line option.
 
 Now an interesting verification stacktrace is getting printed over and over (which also tells us that a fiber can't resume correctly after suspending, and instead some uninstrumented method is being restarted). This is the verification stacktrace:
 
 ~~~
 [quasar] WARNING: Uninstrumented methods (marked '**') or call-sites (marked '!!')
          detected on the call stack:
-      at co.paralleluniverse.common.util.ExtendedStackTrace.here
+      at com.github.fromage.quasi.common.util.ExtendedStackTrace.here
               (ExtendedStackTrace.java:44 bci: 8)
-      at co.paralleluniverse.fibers.Fiber.checkInstrumentation (Fiber.java:1668 bci: 0)
-      at co.paralleluniverse.fibers.Fiber.verifySuspend (Fiber.java:1641 bci: 6)
-      at co.paralleluniverse.fibers.Fiber.verifySuspend (Fiber.java:1636 bci: 3)
-      at co.paralleluniverse.fibers.Fiber.sleep (Fiber.java:672 bci: 0)
-      at co.paralleluniverse.fibers.Fiber.sleep (Fiber.java:664 bci: 4)
+      at com.github.fromage.quasi.fibers.Fiber.checkInstrumentation (Fiber.java:1668 bci: 0)
+      at com.github.fromage.quasi.fibers.Fiber.verifySuspend (Fiber.java:1641 bci: 6)
+      at com.github.fromage.quasi.fibers.Fiber.verifySuspend (Fiber.java:1636 bci: 3)
+      at com.github.fromage.quasi.fibers.Fiber.sleep (Fiber.java:672 bci: 0)
+      at com.github.fromage.quasi.fibers.Fiber.sleep (Fiber.java:664 bci: 4)
 
       at test.troubleshooting.Program$Commands$1.myUnmarkedSuspendableInterfaceMethod)
               (Program.java:57 bci: 72)
@@ -690,12 +690,12 @@ Now an interesting verification stacktrace is getting printed over and over (whi
       at test.troubleshooting.Program.lambda$main$dedc733e$1
               (Program.java:16 bci: 1) (optimized)
 
-      at co.paralleluniverse.strands.SuspendableUtils$VoidSuspendableCallable.run
+      at com.github.fromage.quasi.strands.SuspendableUtils$VoidSuspendableCallable.run
               (SuspendableUtils.java:44 bci: 4)
-      at co.paralleluniverse.strands.SuspendableUtils$VoidSuspendableCallable.run
+      at com.github.fromage.quasi.strands.SuspendableUtils$VoidSuspendableCallable.run
               (SuspendableUtils.java:32 bci: 1)
-      at co.paralleluniverse.fibers.Fiber.run (Fiber.java:1072 bci: 11)
-      at co.paralleluniverse.fibers.Fiber.run1 (Fiber.java:1067 bci: 1)
+      at com.github.fromage.quasi.fibers.Fiber.run (Fiber.java:1072 bci: 11)
+      at com.github.fromage.quasi.fibers.Fiber.run1 (Fiber.java:1067 bci: 1)
 ~~~
 
 The verification is telling us that `mySuspendable1` is partially instrumented, and specifically the call to `myUnmarkedSuspendableMethod2` is not instrumented. Well, since `myUnmarkedSuspendableMethod2` is not marked as suspendable (and is thus also fully uninstrumented) this shouldn't come as a surprise: let's add `@Suspendable` to `myUnmarkedSuspendableMethod2`.
@@ -782,15 +782,15 @@ Each consumer strand will use its own `ticker-consumer`, and each can consume me
 
 The [`Channels`]({{javadoc}}/strands/channels/Channels.html) class has several static methods that can be used to manipulate and compose values sent to or received off channels:
 
-* `map` - returns a channel that transforms messages by applying a given mapping function. There are two versions of `map`: [one that operates]({{javadoc}}/strands/channels/Channels.html#map(co.paralleluniverse.strands.channels.ReceivePort, com.google.common.base.Function)) on `ReceivePort` and [one that operates]({{javadoc}}/strands/channels/Channels.html#mapSend(co.paralleluniverse.strands.channels.SendPort, com.google.common.base.Function)) on `SendPort`.
-* `filter` - returns a channel that only lets messages that satisfy a predicate through. There are two versions of `filter`: [one that operates]({{javadoc}}/strands/channels/Channels.html#filter(co.paralleluniverse.strands.channels.ReceivePort, com.google.common.base.Predicate)) on `ReceivePort` and [one that operates]({{javadoc}}/strands/channels/Channels.html#filterSend(co.paralleluniverse.strands.channels.SendPort, com.google.common.base.Predicate)) on `SendPort`.
-* `flatMap` - returns a channel that transforms any message into a new channel whose messages are then concatenated into the returned channel. There are two versions of `flatMap`: [one that operates]({{javadoc}}/strands/channels/Channels.html#flatMap(co.paralleluniverse.strands.channels.ReceivePort, com.google.common.base.Function)) on `ReceivePort` and [one that operates]({{javadoc}}/strands/channels/Channels.html#flatMapSend(co.paralleluniverse.strands.channels.co.paralleluniverse.strands.channels.Channel, SendPort, com.google.common.base.Function)) on `SendPort`.
-* `reduce` - returns a channel that transforms messages by applying a given reducing function. There are two versions of `reduce`: [one that operates]({{javadoc}}/strands/channels/Channels.html#reduce(co.paralleluniverse.strands.channels.ReceivePort, co.paralleluniverse.common.util.Function2)) on `ReceivePort` and [one that operates]({{javadoc}}/strands/channels/Channels.html#reduceSend(co.paralleluniverse.strands.channels.SendPort, co.paralleluniverse.common.util.Function2)) on `SendPort`.
-* [`zip`]({{javadoc}}/strands/channels/Channels.html#zip(com.google.common.base.Function, co.paralleluniverse.strands.channels.ReceivePort...)) - returns a channel that combines each vector of messages from a vector of channels into a single combined message.
-* [`take`]({{javadoc}}/strands/channels/Channels.html#take(co.paralleluniverse.strands.channels.ReceivePort, long)) - returns a channel that allows receiving at most N messages from another channel before being automatically closed.
-* [`group`]({{javadoc}}/strands/channels/Channels.html#group(co.paralleluniverse.strands.channels.ReceivePort...)) - returns a channel that funnels messages from a set of given channels and supports its atomic dynamic reconfiguration as well as setting mute, pause and solo states for a subset of it (similarly to core.async's `mix`).
+* `map` - returns a channel that transforms messages by applying a given mapping function. There are two versions of `map`: [one that operates]({{javadoc}}/strands/channels/Channels.html#map(com.github.fromage.quasi.strands.channels.ReceivePort, com.google.common.base.Function)) on `ReceivePort` and [one that operates]({{javadoc}}/strands/channels/Channels.html#mapSend(com.github.fromage.quasi.strands.channels.SendPort, com.google.common.base.Function)) on `SendPort`.
+* `filter` - returns a channel that only lets messages that satisfy a predicate through. There are two versions of `filter`: [one that operates]({{javadoc}}/strands/channels/Channels.html#filter(com.github.fromage.quasi.strands.channels.ReceivePort, com.google.common.base.Predicate)) on `ReceivePort` and [one that operates]({{javadoc}}/strands/channels/Channels.html#filterSend(com.github.fromage.quasi.strands.channels.SendPort, com.google.common.base.Predicate)) on `SendPort`.
+* `flatMap` - returns a channel that transforms any message into a new channel whose messages are then concatenated into the returned channel. There are two versions of `flatMap`: [one that operates]({{javadoc}}/strands/channels/Channels.html#flatMap(com.github.fromage.quasi.strands.channels.ReceivePort, com.google.common.base.Function)) on `ReceivePort` and [one that operates]({{javadoc}}/strands/channels/Channels.html#flatMapSend(com.github.fromage.quasi.strands.channels.com.github.fromage.quasi.strands.channels.Channel, SendPort, com.google.common.base.Function)) on `SendPort`.
+* `reduce` - returns a channel that transforms messages by applying a given reducing function. There are two versions of `reduce`: [one that operates]({{javadoc}}/strands/channels/Channels.html#reduce(com.github.fromage.quasi.strands.channels.ReceivePort, com.github.fromage.quasi.common.util.Function2)) on `ReceivePort` and [one that operates]({{javadoc}}/strands/channels/Channels.html#reduceSend(com.github.fromage.quasi.strands.channels.SendPort, com.github.fromage.quasi.common.util.Function2)) on `SendPort`.
+* [`zip`]({{javadoc}}/strands/channels/Channels.html#zip(com.google.common.base.Function, com.github.fromage.quasi.strands.channels.ReceivePort...)) - returns a channel that combines each vector of messages from a vector of channels into a single combined message.
+* [`take`]({{javadoc}}/strands/channels/Channels.html#take(com.github.fromage.quasi.strands.channels.ReceivePort, long)) - returns a channel that allows receiving at most N messages from another channel before being automatically closed.
+* [`group`]({{javadoc}}/strands/channels/Channels.html#group(com.github.fromage.quasi.strands.channels.ReceivePort...)) - returns a channel that funnels messages from a set of given channels and supports its atomic dynamic reconfiguration as well as setting mute, pause and solo states for a subset of it (similarly to core.async's `mix`).
 
-The [`fiberTransform`]({{javadoc}}/strands/channels/Channels.html#fiberTransform-co.paralleluniverse.strands.channels.ReceivePort-co.paralleluniverse.strands.channels.SendPort-co.paralleluniverse.strands.SuspendableAction2-) method can perform any imperative channel transformation by running transformation code in a new dedicated fiber. The transformation reads messages from an input channels and writes messages to the output channel. When the transformation terminates, the output channel is automatically closed.
+The [`fiberTransform`]({{javadoc}}/strands/channels/Channels.html#fiberTransform-com.github.fromage.quasi.strands.channels.ReceivePort-com.github.fromage.quasi.strands.channels.SendPort-com.github.fromage.quasi.strands.SuspendableAction2-) method can perform any imperative channel transformation by running transformation code in a new dedicated fiber. The transformation reads messages from an input channels and writes messages to the output channel. When the transformation terminates, the output channel is automatically closed.
 
 Here's an example of `fiberTransform` using Java 8 syntax:
 
@@ -809,7 +809,7 @@ Channels.fiberTransform(Channels.newTickerConsumerFor(t), avg,
         });
 ~~~
 
-[`transform`]({{javadoc}}/strands/channels/Channels.html#transform-co.paralleluniverse.strands.channels.ReceivePort-) and [`transformSend`]({{javadoc}}/strands/channels/Channels.html#transformSend-co.paralleluniverse.strands.channels.SendPort-) wrap a `ReceivePort` or a `SendPort` respectively, with a fluent interface for all the transformations covered in this section.
+[`transform`]({{javadoc}}/strands/channels/Channels.html#transform-com.github.fromage.quasi.strands.channels.ReceivePort-) and [`transformSend`]({{javadoc}}/strands/channels/Channels.html#transformSend-com.github.fromage.quasi.strands.channels.SendPort-) wrap a `ReceivePort` or a `SendPort` respectively, with a fluent interface for all the transformations covered in this section.
 
 #### Channel Selection
 
@@ -825,7 +825,7 @@ SelectAction sa = Selector.select(Selector.receive(ch1), Selector.send(ch2, msg)
 
 The example will do exactly one of the following operations: send `msg` to `ch1` or receive a message from `ch2`.
 
-A very concise `select` syntax for Kotlin is available in the `co.paralleluniverse.kotlin` package:
+A very concise `select` syntax for Kotlin is available in the `com.github.fromage.quasi.kotlin` package:
 
 ~~~ kotlin
 val ch1 = Channels.newChannel<Int>(1)
@@ -856,7 +856,7 @@ assertTrue (
 
 ## Dataflow (Reactive) {#dataflow-reactive-programming}
 
-Dataflow, or reactive programming, is a computation described by composing variables whose value may be set (and possibly changed) at any given time, without concern for when these values are set. Quasar provides two dataflow primitives: [`Val`]({{javadoc}}/strands/dataflow/Val.html) and [`Var`]({{javadoc}}/strands/dataflow/Var.html) in the `co.paralleluniverse.strands.dataflow` package.
+Dataflow, or reactive programming, is a computation described by composing variables whose value may be set (and possibly changed) at any given time, without concern for when these values are set. Quasar provides two dataflow primitives: [`Val`]({{javadoc}}/strands/dataflow/Val.html) and [`Var`]({{javadoc}}/strands/dataflow/Var.html) in the `com.github.fromage.quasi.strands.dataflow` package.
 
 A [`Val`]({{javadoc}}/strands/dataflow/Val.html) is a dataflow constant. It can have its value set once, and read multiple times. Attempting to read the value of a `Val` before it's been set, will block until a value is set.
 
@@ -974,7 +974,7 @@ Actors are a different abstraction. They are more like objects in object-oriente
 
 An actor is a state machine. It usually encompasses some *state* and the messages it receives trigger *state transitions*. But because the actor has no control over which messages it receives and when (which can be a result of either other actors' behavior, or even the way the OS schedules threads), an actor would be required to process any message and any state, and build a full *state transition matrix*, namely how to transition whenever *any* messages is received at *any* state.
 
-This can not only lead to code explosion; it can lead to bugs. The key to managing a complex state machine is by not handling messages in the order they arrive, but in the order we wish to process them. If your actor extends [`BasicActor`]({{javadoc}}/actors/BasicActor.html), there's [another form]({{javadoc}}/actors/BasicActor.html#receive(co.paralleluniverse.actors.MessageProcessor)) of the `receive` method that allows for *selective receive*. This method takes an instance of [`MessageProcessor`]({{javadoc}}/actors/MessageProcessor.html), which *selects* messages out of the mailbox (a message is selected iff `MessageProcessor.process` returns a non-null value when it is passed the message). Alternatively (to extending `BasicActor`, you can make use of the [`SelectiveReceiveHelper`]({{javadoc}}/actors/SelectiveReceiveHelper.html) class.
+This can not only lead to code explosion; it can lead to bugs. The key to managing a complex state machine is by not handling messages in the order they arrive, but in the order we wish to process them. If your actor extends [`BasicActor`]({{javadoc}}/actors/BasicActor.html), there's [another form]({{javadoc}}/actors/BasicActor.html#receive(com.github.fromage.quasi.actors.MessageProcessor)) of the `receive` method that allows for *selective receive*. This method takes an instance of [`MessageProcessor`]({{javadoc}}/actors/MessageProcessor.html), which *selects* messages out of the mailbox (a message is selected iff `MessageProcessor.process` returns a non-null value when it is passed the message). Alternatively (to extending `BasicActor`, you can make use of the [`SelectiveReceiveHelper`]({{javadoc}}/actors/SelectiveReceiveHelper.html) class.
 
 Let's look at an example. Suppose we have this message class:
 
@@ -1056,7 +1056,7 @@ If a `FOO` is received first, then the next `BAZ` will be added to the list foll
 **Note**: `MessageProcessor` is much more compact in Java 8 when using lambda expressions.
 
 {:.alert .alert-info}
-**Note**: A simple, fluent API for selecting messages based on simple criteria is provided by the [`MessageSelector`]({{javadoc}}/actors/behaviors/MessageSelector.html) class (in the `co.paralleluniverse.actors.behaviors`) package.
+**Note**: A simple, fluent API for selecting messages based on simple criteria is provided by the [`MessageSelector`]({{javadoc}}/actors/behaviors/MessageSelector.html) class (in the `com.github.fromage.quasi.actors.behaviors`) package.
 
 There are several actor systems that do not support selective receive, but Erlang does, and so does Quasar. [The talk *Death by Accidental Complexity*](http://www.infoq.com/presentations/Death-by-Accidental-Complexity), by Ulf Wiger, shows how using selective receive avoids implementing a full, complicated and error-prone transition matrix. [In a different talk](http://www.infoq.com/presentations/1000-Year-old-Design-Patterns), Wiger compared non-selective (FIFO) receive to a tetris game where you must fit each piece into the puzzle as it comes, while selective receive turns the problem into a jigsaw puzzle, where you can look for a piece that you know will fit.
 
@@ -1073,17 +1073,17 @@ The principle of actor error handling is that an actor can be asked to be notifi
 
 #### Linking and Watching Actors
 
-*Linking* two actors causes the death of one to throw an exception in the other. Two actors are linked with the [`link`]({{javadoc}}/actors/Actor.html#link(co.paralleluniverse.actors.ActorRef)) method of the `Actor` class, and can be unlinked with the [`unlink`]({{javadoc}}/actors/Actor.html#unlink(co.paralleluniverse.actors.ActorRef)) method. A link is symmetric: `a.link(b)` has the exact same effect of `b.link(a)`. The next section explains in detail how the linking mechanism works.
+*Linking* two actors causes the death of one to throw an exception in the other. Two actors are linked with the [`link`]({{javadoc}}/actors/Actor.html#link(com.github.fromage.quasi.actors.ActorRef)) method of the `Actor` class, and can be unlinked with the [`unlink`]({{javadoc}}/actors/Actor.html#unlink(com.github.fromage.quasi.actors.ActorRef)) method. A link is symmetric: `a.link(b)` has the exact same effect of `b.link(a)`. The next section explains in detail how the linking mechanism works.
 
-A more robust way of being notified of actor death than linking is with a *watch* (called *monitor* in Erlang; this is one of the few occasions we have abandoned the Erlang function names). To make an actor watch another you use the [`watch`]({{javadoc}}/actors/Actor.html#watch(co.paralleluniverse.actors.ActorRef)) method. When a watched actor, its watcher actor (or many watching actors) receives an `ExitMessage`, explained in the next section. Unlike links, watches are asymmetric (if A watches B, B does not necessarily watch A), and they are also composable: the `watch` method returns a *watch-id* object that identifies the particular watch; every `ExitMessage` contains that *watch-id* object that uniquely identifies the watch that caused the message to be received. If an actor calls the `watch` method several times with the same argument (i.e. it watches the same actor more than once), a message will be received for each of these different watches. A watch can be undone with the [`unwatch`]({{javadoc}}/actors/Actor.html#unwatch(co.paralleluniverse.actors.ActorRef, java.lang.Object)) method.
+A more robust way of being notified of actor death than linking is with a *watch* (called *monitor* in Erlang; this is one of the few occasions we have abandoned the Erlang function names). To make an actor watch another you use the [`watch`]({{javadoc}}/actors/Actor.html#watch(com.github.fromage.quasi.actors.ActorRef)) method. When a watched actor, its watcher actor (or many watching actors) receives an `ExitMessage`, explained in the next section. Unlike links, watches are asymmetric (if A watches B, B does not necessarily watch A), and they are also composable: the `watch` method returns a *watch-id* object that identifies the particular watch; every `ExitMessage` contains that *watch-id* object that uniquely identifies the watch that caused the message to be received. If an actor calls the `watch` method several times with the same argument (i.e. it watches the same actor more than once), a message will be received for each of these different watches. A watch can be undone with the [`unwatch`]({{javadoc}}/actors/Actor.html#unwatch(com.github.fromage.quasi.actors.ActorRef, java.lang.Object)) method.
 
 #### Lifecycle Messages and Lifecycle Exceptions
 
 When actor B that is linked to or watched by actor A dies, it automatically sends an [`ExitMessage`]({{javadoc}}/actors/ExitMessage.html) to A. The message is put in A's mailbox and retrieved when A calls `receive` or `tryReceive`, but it isn't actually returned by those methods.
 
-When `receive` (or `tryReceive`) is called, it takes the next message in the mailbox, and passes it to a protected method called [`filterMessage`]({{javadoc}}/actors/Actor.html#filterMessage(java.lang.Object)). Whatever `filterMessage` returns, that's the message actually returned by `receive` (or `tryReceive`), but it `filterMessage` returns `null`, `receive` will not return and wait for the next message (and `tryReceive` will check if another message is already available, or otherwise return `null`). The default implementation of `filterMessage` always returns the message it received unless it is of type [`LifecycleMessage`]({{javadoc}}/actors/LifecycleMessage.html), in which case it passes it to the protected [`handleLifecycleMessage`]({{javadoc}}/actors/Actor.html#handleLifecycleMessage(co.paralleluniverse.actors.LifecycleMessage)) method.
+When `receive` (or `tryReceive`) is called, it takes the next message in the mailbox, and passes it to a protected method called [`filterMessage`]({{javadoc}}/actors/Actor.html#filterMessage(java.lang.Object)). Whatever `filterMessage` returns, that's the message actually returned by `receive` (or `tryReceive`), but it `filterMessage` returns `null`, `receive` will not return and wait for the next message (and `tryReceive` will check if another message is already available, or otherwise return `null`). The default implementation of `filterMessage` always returns the message it received unless it is of type [`LifecycleMessage`]({{javadoc}}/actors/LifecycleMessage.html), in which case it passes it to the protected [`handleLifecycleMessage`]({{javadoc}}/actors/Actor.html#handleLifecycleMessage(com.github.fromage.quasi.actors.LifecycleMessage)) method.
 
-[`handleLifecycleMessage`]({{javadoc}}/actors/Actor.html#handleLifecycleMessage(co.paralleluniverse.actors.LifecycleMessage)) examines the message. If it is about an actor that has died but has been unlinked or unwatched already, it just ignores the message. If it is an [`ExitMessage`]({{javadoc}}/actors/ExitMessage.html) (which extends `LifecycleMessage`), it checks to see if it's been sent as a result of a *watch* (by testing whether its [`getWatch`]({{javadoc}}/actors/ExitMessage.html#getWatch()) method returns a non-null value). If it is, it's silently ignored. But if it's a result of a *linked* actor dying (`getWatch()` returns `null`), the method throws a [`LifecycleException`]({{javadoc}}/actors/LifecycleException.html). This exception is thrown, in turn, by actor A's call to `receive` (or `tryReceive`). You can override `handleLifecycleMessage` to change this behavior.
+[`handleLifecycleMessage`]({{javadoc}}/actors/Actor.html#handleLifecycleMessage(com.github.fromage.quasi.actors.LifecycleMessage)) examines the message. If it is about an actor that has died but has been unlinked or unwatched already, it just ignores the message. If it is an [`ExitMessage`]({{javadoc}}/actors/ExitMessage.html) (which extends `LifecycleMessage`), it checks to see if it's been sent as a result of a *watch* (by testing whether its [`getWatch`]({{javadoc}}/actors/ExitMessage.html#getWatch()) method returns a non-null value). If it is, it's silently ignored. But if it's a result of a *linked* actor dying (`getWatch()` returns `null`), the method throws a [`LifecycleException`]({{javadoc}}/actors/LifecycleException.html). This exception is thrown, in turn, by actor A's call to `receive` (or `tryReceive`). You can override `handleLifecycleMessage` to change this behavior.
 
 If you do not want actor A to die if linked actor B does, you should surround the call to `receive` or `tryReceive` with a `try {} catch(LifecycleException) {}` block.
 
@@ -1099,9 +1099,9 @@ In addition, registering an actor automatically sets up monitoring for the actor
 
 ### Monitoring Actors
 
-All actors running in a JVM instance are monitored by a [MXBean]({{javadoc}}/actors/ActorsMXBean.html) registered with the name `"co.paralleluniverse:type=Actors"`. For details, please consult the [Javadoc]({{javadoc}}/actors/ActorsMXBean.html).
+All actors running in a JVM instance are monitored by a [MXBean]({{javadoc}}/actors/ActorsMXBean.html) registered with the name `"com.github.fromage.quasi:type=Actors"`. For details, please consult the [Javadoc]({{javadoc}}/actors/ActorsMXBean.html).
 
-In addition, you can create a an [MXBean]({{javadoc}}/actors/ActorMXBean.html) that monitors a specific actor by calling the actor's [`monitor`]({{javadoc}}/actors/Actor.html#monitor()) method. That MBean will be registered as `"co.paralleluniverse:type=quasar,monitor=actor,name=ACTOR_NAME"`.This happens automatically when an actor is registered.
+In addition, you can create a an [MXBean]({{javadoc}}/actors/ActorMXBean.html) that monitors a specific actor by calling the actor's [`monitor`]({{javadoc}}/actors/Actor.html#monitor()) method. That MBean will be registered as `"com.github.fromage.quasi:type=quasar,monitor=actor,name=ACTOR_NAME"`.This happens automatically when an actor is registered.
 
 A monitored actor (either as a result of it being registered or of having called the `monitor` method) can have its MBean removed by calling the [`stopMonitor`]({{javadoc}}/actors/Actor.html#stopMonitor()) method.
 
@@ -1116,9 +1116,9 @@ Erlang's designers have realized that many actors follow some common patterns - 
 
 A very common pattern that emerges when working with patterns is request-response, whereby a *request* message is sent to an actor, and a *response* is sent back to the sender of the request. While simple, some care must be taken to ensure that the response is matched with the correct request.
 
-This behavior is implemented for you in the [`RequestReplyHelper`]({{javadoc}}/actors/behaviors/RequestReplyHelper.html) class (in the `co.paralleluniverse.actors.behaviors` package).
+This behavior is implemented for you in the [`RequestReplyHelper`]({{javadoc}}/actors/behaviors/RequestReplyHelper.html) class (in the `com.github.fromage.quasi.actors.behaviors` package).
 
-To use it, the request message must extend [`co.paralleluniverse.actors.behaviors.RequestMessage`]({{javadoc}}/actors/behaviors/RequestMessage.html). Suppose we have a `IsDivisibleBy` message class that extends `RequestMessage`. We can interact with a divisor-checking actor like so:
+To use it, the request message must extend [`com.github.fromage.quasi.actors.behaviors.RequestMessage`]({{javadoc}}/actors/behaviors/RequestMessage.html). Suppose we have a `IsDivisibleBy` message class that extends `RequestMessage`. We can interact with a divisor-checking actor like so:
 
 ~~~ java
 boolean result = RequestReplyHelper.call(actor, new IsDivisibleBy(100, 50));
@@ -1303,12 +1303,12 @@ Hot code swapping is the ability to change your program's code while it is runni
 
 To create an upgraded version of an actor class or several of them, package the upgraded classes, along with any other accompanying classes into a jar file. When the jar is loaded, as we'll see below, those classes that are marked as upgrades will replace their current versions. Only classes representing actor implementation (or actor behavior implementation) can be upgraded directly. Other classes might be upgraded as well if they store actor state as we'll see in the next section. Actor (and behavior) upgrades must be explicitly or implicitly specified. To explicitly specify an upgrade, annotate the class with the [`@Upgrade`]({{javadoc}}/actors/actors/Upgrade.html) annotation, or include its fully qualified name in a space-separated list as the value of the `"Upgrade-Classes"` attribute in the jar's manifest. Alternatively, if the `"Upgrade-Classes"` attribute has the value `*`, all classes in the jar extending an actor or behavior class (or implementing a behavior interface like `ServerHandler`) will be automatically upgraded.
 
-Once the jar is created, there are two ways to load it into the program. The first involves calling the `reloadModule` operation of the `"co.paralleluniverse:type=ActorLoader"` MBean, passing a URL for the jar; this can be done via any JMX console, such as VisualVM. The `unloadModule` operation can be used to unload the jar and revert actors to their previous implementation.
+Once the jar is created, there are two ways to load it into the program. The first involves calling the `reloadModule` operation of the `"com.github.fromage.quasi:type=ActorLoader"` MBean, passing a URL for the jar; this can be done via any JMX console, such as VisualVM. The `unloadModule` operation can be used to unload the jar and revert actors to their previous implementation.
 
-The second way is by designating a special module directory by setting the `"co.paralleluniverse.actors.moduleDir"` system property (this must be done when originally running the program). Then, any jar file copied into that directory will be automatically detected and loaded (this may take up to 10 seconds on some operating systems). A loaded jar that is removed from the module directory will be automatically unloaded.
+The second way is by designating a special module directory by setting the `"com.github.fromage.quasi.actors.moduleDir"` system property (this must be done when originally running the program). Then, any jar file copied into that directory will be automatically detected and loaded (this may take up to 10 seconds on some operating systems). A loaded jar that is removed from the module directory will be automatically unloaded.
 
 {:.alert .alert-info}
-**Note**: You might want to enable the `"co.paralleluniverse.actors.ActorLoader"` logger to view logs pertaining to hot code swapping.
+**Note**: You might want to enable the `"com.github.fromage.quasi.actors.ActorLoader"` logger to view logs pertaining to hot code swapping.
 
 #### State Upgrade
 
@@ -1389,7 +1389,7 @@ In this version, clustering is pretty rudimentary, but essential features should
 
 ### Enabling Clustering
 
-First, you will need to add the `co.paralleluniverse:quasar-galaxy` artifact as a dependency to your project, and set some Galaxy cluster properties. At the very least you will need to set `"galaxy.nodeId"`, which will have to be a different `short` value for each master node. If you're running several nodes on the same machine, you will also need to set `"galaxy.port"` and `"galaxy.slave_port"`. These properties can be set in several ways. The simplest is to define them as JVM system properties (as `-D` command line arguments).However, you can also set them in the Galaxy configuration XML files or in a properties file. Please refer to the [Galaxy documentation](http://docs.paralleluniverse.co/galaxy/) for more detail.
+First, you will need to add the `com.github.fromage.quasi:quasar-galaxy` artifact as a dependency to your project, and set some Galaxy cluster properties. At the very least you will need to set `"galaxy.nodeId"`, which will have to be a different `short` value for each master node. If you're running several nodes on the same machine, you will also need to set `"galaxy.port"` and `"galaxy.slave_port"`. These properties can be set in several ways. The simplest is to define them as JVM system properties (as `-D` command line arguments).However, you can also set them in the Galaxy configuration XML files or in a properties file. Please refer to the [Galaxy documentation](http://docs.paralleluniverse.co/galaxy/) for more detail.
 
 Then, to make an actor discoverable cluster-wide, all you need to do is register it with the [`register`]({{javadoc}}/actors/Actor.html#register()) method of the `Actor` class.
 
@@ -1405,13 +1405,13 @@ For instructions on how to configure the Galaxy cluster, please refer to Galaxy'
 
 Running actors can migrate from one cluster node to another, while preserving their state. Migration happens in two steps. First an actor *migrates*, which suspends it and makes its internal state available to the cluster, and then it is *hired* by another cluster node an resumed.
 
-Actors that support migration, must implement the (empty) marker interface [`MigratingActor`]({{javadoc}}/actors/MigratingActor.html). Then, in order to migrate, an actor must call one of two methods: [`migrateAndRestart`]({{javadoc}}/actors/Actor.html#migrateAndRestart()) or [`migrate`]({{javadoc}}/actors/Actor.html#migrate()). [`migrateAndRestart`]({{javadoc}}/actors/Actor.html#migrateAndRestart()) suspends the actor in such a way that when it is later hired, it will be restarted (i.e., its `doRun` method will be called again and run from the top), but the current value of the actor's fields will be preserved, while [`migrate`]({{javadoc}}/actors/Actor.html#migrate()) suspends the fiber the actor is running in (and is therefore available only for actors running in fibers), so that when the actor is hired, it will continue execution from the point the `migrate` method was called. The [`hire` method]({{javadoc}}/actors/Actor.html#hire(co.paralleluniverse.actors.ActorRef)) hires and resumes the actor.
+Actors that support migration, must implement the (empty) marker interface [`MigratingActor`]({{javadoc}}/actors/MigratingActor.html). Then, in order to migrate, an actor must call one of two methods: [`migrateAndRestart`]({{javadoc}}/actors/Actor.html#migrateAndRestart()) or [`migrate`]({{javadoc}}/actors/Actor.html#migrate()). [`migrateAndRestart`]({{javadoc}}/actors/Actor.html#migrateAndRestart()) suspends the actor in such a way that when it is later hired, it will be restarted (i.e., its `doRun` method will be called again and run from the top), but the current value of the actor's fields will be preserved, while [`migrate`]({{javadoc}}/actors/Actor.html#migrate()) suspends the fiber the actor is running in (and is therefore available only for actors running in fibers), so that when the actor is hired, it will continue execution from the point the `migrate` method was called. The [`hire` method]({{javadoc}}/actors/Actor.html#hire(com.github.fromage.quasi.actors.ActorRef)) hires and resumes the actor.
 
 ## Quasar and Reactive Streams
 
 [Reactive Streams](https://github.com/reactive-streams/reactive-streams-jvm/blob/v1.0.0/README.md) are a new JVM non-JCP standard for an API that facilitates interoperation among various libraries for asynchronous IO streams, including RxJava, Akka Streams, Pivotal Reactor and Quasar. The standard allows code using any of the compliant libraries to interoperate with code written using any of the other.
 
-Quasar's `quasar-reactive-streams` artifact contains a full, TCK-compliant implementation of Reactive Streams, which converts streams to Quasar channels and vice versa. The implementation contains a single public class, `co.paralleluniverse.strands.channels.reactivestreams.ReactiveStreams`, with a set of static methods that perform the conversion. The [`ReactiveStreams` class Javadoc]({{javadoc}}/strands/channels/reactivestreams/ReactiveStreams.html)) has all the details.
+Quasar's `quasar-reactive-streams` artifact contains a full, TCK-compliant implementation of Reactive Streams, which converts streams to Quasar channels and vice versa. The implementation contains a single public class, `com.github.fromage.quasi.strands.channels.reactivestreams.ReactiveStreams`, with a set of static methods that perform the conversion. The [`ReactiveStreams` class Javadoc]({{javadoc}}/strands/channels/reactivestreams/ReactiveStreams.html)) has all the details.
 
 ## Examples
 
@@ -1436,13 +1436,13 @@ You can run them after cloning the repository.
 In order to run the ping pong example, start the Pong actor by:
 
 ~~~ sh
-gradle :quasar-galaxy:run -PmainClass=co.paralleluniverse.galaxy.example.pingpong.Pong
+gradle :quasar-galaxy:run -PmainClass=com.github.fromage.quasi.galaxy.example.pingpong.Pong
 ~~~
 
 Start the Ping actor in a different terminal by:
 
 ~~~
-gradle :quasar-galaxy:run -PmainClass=co.paralleluniverse.galaxy.example.pingpong.Ping
+gradle :quasar-galaxy:run -PmainClass=com.github.fromage.quasi.galaxy.example.pingpong.Ping
 ~~~
 
 To run the actors on different computers, change the following lines in the build.gradle file to the appropriate network configuration:
