@@ -66,6 +66,7 @@ class ExtendedStackTraceClassContext extends ExtendedStackTrace {
         final String className = ste.getClassName();
         return (className.startsWith("sun.reflect")
                 || className.equals("java.lang.reflect.Method")
+                || className.startsWith("jdk.internal.reflect.")
                 || className.startsWith("java.lang.invoke.")
                 // Originated from http://bugs.java.com/view_bug.do?bug_id=8025636, Quasar PR #207
                 || className.contains("$$Lambda$"));
