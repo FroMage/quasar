@@ -159,12 +159,12 @@ public class JavaAgent {
         instrumentor.setLog(new Log() {
             @Override
             public void log(LogLevel level, String msg, Object... args) {
-                System.err.println("[quasar] " + level + ": " + String.format(msg, args));
+                System.err.println("[quasi] " + level + ": " + String.format(msg, args));
             }
 
             @Override
             public void error(String msg, Throwable exc) {
-                System.err.println("[quasar] ERROR: " + msg);
+                System.err.println("[quasi] ERROR: " + msg);
                 exc.printStackTrace(System.err);
             }
         });

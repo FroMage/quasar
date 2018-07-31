@@ -225,7 +225,7 @@ public class SuspendablesScanner extends Task {
         ClassLoaderUtil.accept(cl, new ClassLoaderUtil.Visitor() {
             @Override
             public void visit(String resource, URL url, ClassLoader cl) throws IOException {
-                if (resource.startsWith("java/util") || resource.startsWith("java/lang") || resource.startsWith("co/paralleluniverse/asm"))
+                if (resource.startsWith("java/util") || resource.startsWith("java/lang") || resource.startsWith("com/github/fromage/quasi/asm"))
                     return;
                 if (isClassFile(url.getFile())) {
                     try (InputStream is = cl.getResourceAsStream(resource)) { // cl.getResourceAsStream(resource)
@@ -815,7 +815,7 @@ public class SuspendablesScanner extends Task {
         }
 
         public void setSuspendType(SuspendableType suspendType) {
-//            if ("co/paralleluniverse/strands/Strand".equals(owner) && "join()V".equals(name)) {
+//            if ("com/github/fromage/quasi/strands/Strand".equals(owner) && "join()V".equals(name)) {
 //                System.err.println("XXXX:" + owner + "." + name + " " + suspendType);
 //                Thread.dumpStack();
 //            }

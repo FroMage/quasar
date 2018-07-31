@@ -250,7 +250,7 @@ public final class VerificationTest {
     public final void testVerifyUninstrumentedCallSiteDeclaringAndOwnerOK() throws ExecutionException, InterruptedException, SuspendExecution {
         assumeTrue(SystemProperties.isEmptyOrTrue("com.github.fromage.quasi.fibers.verifyInstrumentation"));
 
-        // From https://github.com/puniverse/quasar/issues/255
+        // From https://github.com/puniverse/quasi/issues/255
         final IntChannel intChannel = Channels.newIntChannel(1);
         try {
             new Fiber<>(new SuspendableCallable<Integer>() {

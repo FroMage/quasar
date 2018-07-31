@@ -1,4 +1,4 @@
-include 'quasar-core'
+include 'quasi-core'
 
 gradle.ext.java8 = true
 

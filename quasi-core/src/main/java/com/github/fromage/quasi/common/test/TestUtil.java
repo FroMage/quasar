@@ -39,7 +39,7 @@ public class TestUtil {
             e.printStackTrace(System.err);
             if (Debug.isDebug() && !(e instanceof OutOfMemoryError)) {
                 Debug.record(0, "EXCEPTION IN THREAD " + Thread.currentThread().getName() + ": " + e + " - " + Arrays.toString(e.getStackTrace()));
-                Debug.dumpRecorder("quasar." + desc.getClassName() + "." + desc.getMethodName() + ".dump");
+                Debug.dumpRecorder("quasi." + desc.getClassName() + "." + desc.getMethodName() + ".dump");
             }
         }
 

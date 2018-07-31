@@ -1,3 +1,8 @@
+This project is forked from Quasar: http://docs.paralleluniverse.co/quasar in order to:
+- Drop JDK7 support
+- Support JDK from 8 to 11
+- Remove all non-core modules
+
 This product contains modified source code from Continuations Library, by Matthias Mann:
 
     Copyright (c) 2008-2013, Matthias Mann

@@ -25,7 +25,7 @@ import com.github.fromage.quasi.common.reflection.ClassLoaderUtil;
  */
 public class ClassLoaderUtilTKB {
     public static void main(String[] args) throws Exception {
-        File f = new File("build/libs/quasar-core-0.4.0-SNAPSHOT.jar");
+        File f = new File("build/libs/quasi-core-0.4.0-SNAPSHOT.jar");
         System.out.println(f.exists());
         URLClassLoader cl = new URLClassLoader(new URL[]{f.toURI().toURL()});
         ClassLoaderUtil.accept(cl, new ClassLoaderUtil.Visitor() {

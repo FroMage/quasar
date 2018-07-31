@@ -680,7 +680,7 @@ footer { padding:70px 0 55px; background:url(../images/bg.png); }
 	.green #inner-head .container { position:relative; min-height:455px; }   
 	
 	.green .product-icon-wrap { top:0; right:0; width:318px; height:433px; }
-		.green .product-icon { width:318px; height:314px; background:url(../images/quasar_big.png) no-repeat; top:0; left:0; }
+		.green .product-icon { width:318px; height:314px; background:url(../images/quasi_big.png) no-repeat; top:0; left:0; }
 		.green .product-shadow { width:260px; height:33px; bottom:0; left:15px; background:url(../images/galaxy_shadow.png) no-repeat; }
 	
 	.green .bar-arrow { background:#228372 url(../images/arrow6.png) top center no-repeat; }

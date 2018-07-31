@@ -28,7 +28,7 @@ import com.github.fromage.quasi.fibers.TestsHelper;
 import com.github.fromage.quasi.strands.SuspendableRunnable;
 
 /**
- * See bug #282 (https://github.com/puniverse/quasar/issues/282)
+ * See bug #282 (https://github.com/puniverse/quasi/issues/282)
  * @author pron
  */
 public class LeakTest implements SuspendableRunnable {

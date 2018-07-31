@@ -25,7 +25,7 @@ import com.github.fromage.quasi.strands.SuspendableCallable;
 import static org.junit.Assert.*;
 
 /**
- * A test for issue #73: https://github.com/puniverse/quasar/issues/73
+ * A test for issue #73: https://github.com/puniverse/quasi/issues/73
  * @author circlespainter
  */
 public class RTInitLocalArrayArgTest implements SuspendableCallable {

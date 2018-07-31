@@ -2,12 +2,12 @@ markdown: enhanced_kramdown
 highlighter: pygments
 lsi: false
 safe: false
-baseurl: /quasar
+baseurl: /quasi
 
 ## Site globals used throughout docs.
 project: Quasar
 version: 0.7.9
-github: puniverse/quasar
-google_group: "https://groups.google.com/forum/#!forum/quasar-pulsar-user"
+github: puniverse/quasi
+google_group: "https://groups.google.com/forum/#!forum/quasi-pulsar-user"
 ga_tracking_id: UA-25007319-2
 code_dir: "../"

@@ -8,7 +8,7 @@ description: "Quasar is a JVM library that provides true lightweight threads, CS
 
 Quasar is a library that provides high-performance lightweight threads, Go-like channels, Erlang-like actors, and other asynchronous programming tools for Java and [**Kotlin**](http://kotlinlang.org).
 
-A good introduction to Quasar can be found in the blog post [Erlang (and Go) in Clojure (and Java), Lightweight Threads, Channels and Actors for the JVM](http://blog.paralleluniverse.co/post/49445260575/quasar-pulsar).
+A good introduction to Quasar can be found in the blog post [Erlang (and Go) in Clojure (and Java), Lightweight Threads, Channels and Actors for the JVM](http://blog.paralleluniverse.co/post/49445260575/quasi-pulsar).
 
 Quasar is developed by [Parallel Universe] and released as free software, dual-licensed under the Eclipse Public License and the GNU Lesser General Public License.
 
@@ -16,7 +16,7 @@ Quasar is developed by [Parallel Universe] and released as free software, dual-l
 
 ### Dependencies
 
-* [JSR166e](http://g.oswego.edu/dl/concurrency-interest/) (embedded in quasar-core) -- java.util.concurrent, by Doug Lea and contributors
+* [JSR166e](http://g.oswego.edu/dl/concurrency-interest/) (embedded in quasi-core) -- java.util.concurrent, by Doug Lea and contributors
 * [ASM](http://asm.ow2.org/) --- Java bytecode manipulation and analysis framework, by the ASM team
 * [Metrics](http://metrics.codahale.com/) --- A measurement and monitoring library, by Coda Hale
 * [Guava](https://code.google.com/p/guava-libraries/) --- Java utility classes, by Google
@@ -32,73 +32,73 @@ A core component of Quasar, bytecode instrumentation, is a fork of the wonderful
 
 ### July 28, 2017
 
-Quasar [0.7.9](https://github.com/puniverse/quasar/releases/tag/v0.7.9) has been released.
+Quasar [0.7.9](https://github.com/puniverse/quasi/releases/tag/v0.7.9) has been released.
 
 ### May 24, 2017
 
-Quasar [0.7.8](https://github.com/puniverse/quasar/releases/tag/v0.7.8) has been released.
+Quasar [0.7.8](https://github.com/puniverse/quasi/releases/tag/v0.7.8) has been released.
 
 ### December 2, 2016
 
-Quasar [0.7.7](https://github.com/puniverse/quasar/releases/tag/v0.7.7) has been released.
+Quasar [0.7.7](https://github.com/puniverse/quasi/releases/tag/v0.7.7) has been released.
 
 ### August 7, 2016
 
-Quasar [0.7.6](https://github.com/puniverse/quasar/releases/tag/v0.7.6) has been released.
+Quasar [0.7.6](https://github.com/puniverse/quasi/releases/tag/v0.7.6) has been released.
 
 ### May 2, 2016
 
-Quasar [0.7.5](https://github.com/puniverse/quasar/releases/tag/v0.7.5) has been released.
+Quasar [0.7.5](https://github.com/puniverse/quasi/releases/tag/v0.7.5) has been released.
 
 ### January 18, 2016
 
-Quasar [0.7.4](https://github.com/puniverse/quasar/releases/tag/v0.7.4) has been released.
+Quasar [0.7.4](https://github.com/puniverse/quasi/releases/tag/v0.7.4) has been released.
 
 ### August 28, 2015
 
-Quasar [0.7.3](https://github.com/puniverse/quasar/releases/tag/v0.7.3) has been released.
+Quasar [0.7.3](https://github.com/puniverse/quasi/releases/tag/v0.7.3) has been released.
 
 ### June 25, 2015
 
-Quasar [0.7.2](https://github.com/puniverse/quasar/releases/tag/v0.7.2) has been released.
+Quasar [0.7.2](https://github.com/puniverse/quasi/releases/tag/v0.7.2) has been released.
 
 ### May 29, 2015
 
-Quasar [0.7.0](https://github.com/puniverse/quasar/releases/tag/v0.7.0) has been released.
+Quasar [0.7.0](https://github.com/puniverse/quasi/releases/tag/v0.7.0) has been released.
 
 ### December 23, 2014
 
-Quasar [0.6.2](https://github.com/puniverse/quasar/releases/tag/v0.6.2) has been released.
+Quasar [0.6.2](https://github.com/puniverse/quasi/releases/tag/v0.6.2) has been released.
 
 ### September 23, 2014
 
-Quasar [0.6.1](https://github.com/puniverse/quasar/releases/tag/v0.6.1) has been released.
+Quasar [0.6.1](https://github.com/puniverse/quasi/releases/tag/v0.6.1) has been released.
 
 ### July 23, 2014
 
-Quasar [0.6.0](https://github.com/puniverse/quasar/releases/tag/v0.6.0) has been released.
+Quasar [0.6.0](https://github.com/puniverse/quasi/releases/tag/v0.6.0) has been released.
 
 ### March 26, 2014
 
-Quasar [0.5.0](https://github.com/puniverse/quasar/releases/tag/v0.5.0) has been released.
+Quasar [0.5.0](https://github.com/puniverse/quasi/releases/tag/v0.5.0) has been released.
 
 ### January 22, 2014
 
-Quasar [0.4.0](https://github.com/puniverse/quasar/releases/tag/v0.4.0) has been released.
+Quasar [0.4.0](https://github.com/puniverse/quasi/releases/tag/v0.4.0) has been released.
 
 ### October 15, 2013
 
-Quasar [0.3.0](https://github.com/puniverse/quasar/releases/tag/v0.3.0) has been released.
+Quasar [0.3.0](https://github.com/puniverse/quasi/releases/tag/v0.3.0) has been released.
 
 A [new spaceships demo](https://github.com/puniverse/spaceships-demo) showcases Quasar's (and SpaceBase's) abilities.
 
 ### July 19, 2013
 
-Quasar/Pulsar [0.2.0](https://github.com/puniverse/quasar/releases/tag/v0.2.0) [has been released](http://blog.paralleluniverse.co/post/55876031297/quasar-pulsar-0-2-0-distributed-actors-supervisors).
+Quasar/Pulsar [0.2.0](https://github.com/puniverse/quasi/releases/tag/v0.2.0) [has been released](http://blog.paralleluniverse.co/post/55876031297/quasi-pulsar-0-2-0-distributed-actors-supervisors).
 
 ### May 2, 2013
 
-Introductory blog post: [Erlang (and Go) in Clojure (and Java), Lightweight Threads, Channels and Actors for the JVM](<http://blog.paralleluniverse.co/post/49445260575/quasar-pulsar>).
+Introductory blog post: [Erlang (and Go) in Clojure (and Java), Lightweight Threads, Channels and Actors for the JVM](<http://blog.paralleluniverse.co/post/49445260575/quasi-pulsar>).
 
 # Getting Started
 
@@ -106,7 +106,7 @@ Introductory blog post: [Erlang (and Go) in Clojure (and Java), Lightweight Thre
 
 Quasar runs on Java 7 and higher.
 
-Quasar builds are tested during development in Mac OS X and Linux environments against the latest production JDK 7 and JDK 8 builds, as well as with [Travis CI](https://travis-ci.org/puniverse/quasar) using the [Trusty Beta](https://docs.travis-ci.com/user/trusty-ci-environment/) environment with the latest production JDK 7 and JDK 8 builds.
+Quasar builds are tested during development in Mac OS X and Linux environments against the latest production JDK 7 and JDK 8 builds, as well as with [Travis CI](https://travis-ci.org/puniverse/quasi) using the [Trusty Beta](https://docs.travis-ci.com/user/trusty-ci-environment/) environment with the latest production JDK 7 and JDK 8 builds.
 
 As of June 20, 2016 the Travis CI build runs against Oracle's `1.7.0_80-b15` and `1.8.0_91-b14` and is known to require at least JDK 8 `1.8.0_65`.
 
@@ -119,11 +119,11 @@ Add the following Maven/Gradle dependencies:
 
 | Feature          | Artifact
 |------------------|------------------
-| Core (required)  | `com.github.fromage.quasi:quasar-core:{{site.version}}[:jdk8]` (for JDK 8 optionally add the `jdk8` classifier)
-| Actors           | `com.github.fromage.quasi:quasar-actors:{{site.version}}`
-| Clustering       | `com.github.fromage.quasi:quasar-galaxy:{{site.version}}`
-| Reactive Streams | `com.github.fromage.quasi:quasar-reactive-streams:{{site.version}}`
-| Kotlin (JDK8+)   | `com.github.fromage.quasi:quasar-kotlin:{{site.version}}`
+| Core (required)  | `com.github.fromage.quasi:quasi-core:{{site.version}}[:jdk8]` (for JDK 8 optionally add the `jdk8` classifier)
+| Actors           | `com.github.fromage.quasi:quasi-actors:{{site.version}}`
+| Clustering       | `com.github.fromage.quasi:quasi-galaxy:{{site.version}}`
+| Reactive Streams | `com.github.fromage.quasi:quasi-reactive-streams:{{site.version}}`
+| Kotlin (JDK8+)   | `com.github.fromage.quasi:quasi-kotlin:{{site.version}}`
 
 
 ### Instrumenting Your Code {#instrumentation}
@@ -135,7 +135,7 @@ Quasar fibers rely on bytecode instrumentation. This can be done at classloading
 Quasar's lightweight thread implementation relies on bytecode instrumentation. Instrumentation can be performed at compilation time (detailed below) or at runtime using a Java agent. To run the Java agent, the following must be added to the java command line (or use your favorite build tool to add this as a JVM argument):
 
 ~~~ sh
--javaagent:path-to-quasar-jar.jar
+-javaagent:path-to-quasi-jar.jar
 ~~~
 
 #### Specifying the Java Agent with Maven:
@@ -181,7 +181,7 @@ For example, if you want to configure a maven exec task you could add the follow
             <argument>-Dcom.github.fromage.quasi.fibers.verifyInstrumentation=true</argument>
 
             <!-- Quasar Agent -->
-            <argument>-javaagent:${com.github.fromage.quasi:quasar-core:jar}</argument>
+            <argument>-javaagent:${com.github.fromage.quasi:quasi-core:jar}</argument>
 
             <!-- Classpath -->
             <argument>-classpath</argument> <classpath/>
@@ -204,21 +204,21 @@ To have the agent running during tests you could also add:
           <argLine>-Dcom.github.fromage.quasi.fibers.verifyInstrumentation=true</argLine>
 
           <!-- Quasar Agent -->
-          <argLine>-javaagent:${com.github.fromage.quasi:quasar-core:jar}</argLine>
+          <argLine>-javaagent:${com.github.fromage.quasi:quasi-core:jar}</argLine>
         </configuration>
       </plugin>
 ~~~
 
-A [Quasar Maven archetype](https://github.com/puniverse/quasar-mvn-archetype) is also available.
+A [Quasar Maven archetype](https://github.com/puniverse/quasi-mvn-archetype) is also available.
 
 #### Specifying the Java Agent with Gradle
 
-The way to do this with Gradle is as follows. Add a `quasar` configuration to your `build.gradle` file:
+The way to do this with Gradle is as follows. Add a `quasi` configuration to your `build.gradle` file:
 
 ~~~ groovy
 configurations {
     // ...
-    quasar
+    quasi
 }
 ~~~
 
@@ -227,29 +227,29 @@ In your dependencies block, add:
 ~~~ groovy
 dependencies {
     // ....
-    quasar  "com.github.fromage.quasi:quasar-core:{{site.version}}"
+    quasi  "com.github.fromage.quasi:quasi-core:{{site.version}}"
 }
 ~~~
 
 Finally, in your `run` task (or any task of type `JavaExec` or `Test`), add the system property:
 
 ~~~ groovy
-jvmArgs "-javaagent:${configurations.quasar.iterator().next()}"
+jvmArgs "-javaagent:${configurations.quasi.iterator().next()}"
 ~~~
 
-A [Quasar Gradle template project](https://github.com/puniverse/quasar-gradle-template) is also available.
+A [Quasar Gradle template project](https://github.com/puniverse/quasi-gradle-template) is also available.
 
 ### Ahead-of-Time (AOT) Instrumentation {#aot}
 
 The easy and preferable way to instrument programs using Quasar is with the Java agent, which instruments code at runtime. Sometimes, however, running a Java agent is not an option.
 
-Quasar supports AOT instrumentation with an Ant task. The task is `com.github.fromage.quasi.fibers.instrument.InstrumentationTask` found in `quasar-core.jar`, and it accepts a fileset of classes to instrument. Not all classes will actually be instrumented – only those with suspendable methods (see below) – so simply give the task all of the class files in your program. In fact, Quasar itself is instrumented ahead-of-time.
+Quasar supports AOT instrumentation with an Ant task. The task is `com.github.fromage.quasi.fibers.instrument.InstrumentationTask` found in `quasi-core.jar`, and it accepts a fileset of classes to instrument. Not all classes will actually be instrumented – only those with suspendable methods (see below) – so simply give the task all of the class files in your program. In fact, Quasar itself is instrumented ahead-of-time.
 
 ### Building Quasar {#build}
 
 Clone the repository:
 
-    git clone git://github.com/puniverse/quasar.git quasar
+    git clone git://github.com/puniverse/quasi.git quasi
 
 then [install Gradle](https://docs.gradle.org/current/userguide/installation.html) and run:
 
@@ -259,7 +259,7 @@ then [install Gradle](https://docs.gradle.org/current/userguide/installation.htm
 
 ## Quasar Core
 
-{% capture code %}https://github.com/{{site.github}}/tree/master/quasar-core/src/main/java/co/paralleluniverse{% endcapture %}
+{% capture code %}https://github.com/{{site.github}}/tree/master/quasi-core/src/main/java/co/paralleluniverse{% endcapture %}
 {% capture javadoc %}{{site.baseurl}}/javadoc/co/paralleluniverse{% endcapture %}
 
 ### Fibers {#fibers}
@@ -649,7 +649,7 @@ com.github.fromage.quasi.fibers.instrument.UnableToInstrumentException:
          because of synchronization
 ~~~
 
-For now we'll fix that by simply removing the (unused) constructor and by removing the `synchronized` modifier but in real situations the constructor's suspendable parts would probable become a (suspendable) initialization method; as for `synchronized` methods (and/or blocks) there are several options, for example using [Quasar's port of `java.util.concurrent`](http://docs.paralleluniverse.co/quasar/javadoc/co/paralleluniverse/strands/concurrent/package-frame.html) instead, or just telling Quasar to instrument them anyway through the `m` agent argument (but do that only if you're sure that the lock will be held for a very short time).
+For now we'll fix that by simply removing the (unused) constructor and by removing the `synchronized` modifier but in real situations the constructor's suspendable parts would probable become a (suspendable) initialization method; as for `synchronized` methods (and/or blocks) there are several options, for example using [Quasar's port of `java.util.concurrent`](http://docs.paralleluniverse.co/quasi/javadoc/co/paralleluniverse/strands/concurrent/package-frame.html) instead, or just telling Quasar to instrument them anyway through the `m` agent argument (but do that only if you're sure that the lock will be held for a very short time).
 
 After doing that, a new run yields:
 
@@ -667,7 +667,7 @@ When we run again there are no message errors but the program still hangs, so it
 Now an interesting verification stacktrace is getting printed over and over (which also tells us that a fiber can't resume correctly after suspending, and instead some uninstrumented method is being restarted). This is the verification stacktrace:
 
 ~~~
-[quasar] WARNING: Uninstrumented methods (marked '**') or call-sites (marked '!!')
+[quasi] WARNING: Uninstrumented methods (marked '**') or call-sites (marked '!!')
          detected on the call stack:
       at com.github.fromage.quasi.common.util.ExtendedStackTrace.here
               (ExtendedStackTrace.java:44 bci: 8)
@@ -703,13 +703,13 @@ The verification is telling us that `mySuspendable1` is partially instrumented, 
 It tells us that `mySuspendableMethod3` is not instrumented at all either. Why is that, considering that it calls a method of an anonymous implementation of `MyUnmarkedInterface` that seems correctly instrumented? This is because it calls it through its interface type, which is unmarked instead, so Quasar doesn't know that the call must be instrumented. In addition, there are no other suspendable calls in `mySuspendable3` so it doesn't get instrumented at all. Indeed, if we turn on the instrumentation trace by adding the `=vdc` suffix to the agent before fixing that, we see that Quasar doesn't find any suspendable calls in `mySuspendableMethod3`:
 
 ~~~
-[quasar] INFO: Method test/troubleshooting/Program$Commands#mySuspendableMethod3
+[quasi] INFO: Method test/troubleshooting/Program$Commands#mySuspendableMethod3
                suspendable: SUSPENDABLE (markedSuspendable: SUSPENDABLE setSuspendable: null)
 ...
-[quasar] INFO: About to instrument method
+[quasi] INFO: About to instrument method
                test/troubleshooting/Program$Commands#mySuspendableMethod3()V
-[quasar] INFO: Reading class: test/troubleshooting/Program$Commands$MyUnmarkedInterface
-[quasar] INFO: Nothing to instrument in method
+[quasi] INFO: Reading class: test/troubleshooting/Program$Commands$MyUnmarkedInterface
+[quasi] INFO: Nothing to instrument in method
                test/troubleshooting/Program$Commands#mySuspendableMethod3()V
 ~~~
 
@@ -728,11 +728,11 @@ Since Quasar fibers are scheduled on threads and have a stack, they can be debug
 
 ### Getting Help {#getting-help}
 
-If you're stuck with an instrumentation issue you don't understand, for example there are uninstrumented methods and/or call sites but you can't understand why or you get strange exceptions without any uninstrumented reports, don't hesitate to reach out to the [Quasar/Pulsar user group](https://groups.google.com/forum/#!forum/quasar-pulsar-user) and, if possible, provide a small project including the build and run commands as well as minimal (as much as possible) code that reproduces the problem, together with the instrumentation verification stacktrace(s) (if any) and/or "strange" exception stacktraces. If you can't post the information publicly then consider reaching out to the Quasar team members with a private email.
+If you're stuck with an instrumentation issue you don't understand, for example there are uninstrumented methods and/or call sites but you can't understand why or you get strange exceptions without any uninstrumented reports, don't hesitate to reach out to the [Quasar/Pulsar user group](https://groups.google.com/forum/#!forum/quasi-pulsar-user) and, if possible, provide a small project including the build and run commands as well as minimal (as much as possible) code that reproduces the problem, together with the instrumentation verification stacktrace(s) (if any) and/or "strange" exception stacktraces. If you can't post the information publicly then consider reaching out to the Quasar team members with a private email.
 
 As a last choice, share only the information you can but consider that this could make finding the problem harder: as we've just seen, effective instrumentation troubleshooting usually requires at least the involved code and instrumentation verification stacktraces.
 
-If you're fairly sure you found a bug then don't hesitate to open a [new GitHub issue](https://github.com/puniverse/quasar/issues/new) but don't forget to first search the user group and [the already open tickets](https://github.com/puniverse/quasar/issues) for problems similar to yours.
+If you're fairly sure you found a bug then don't hesitate to open a [new GitHub issue](https://github.com/puniverse/quasi/issues/new) but don't forget to first search the user group and [the already open tickets](https://github.com/puniverse/quasi/issues) for problems similar to yours.
 
 ## Channels {#channels}
 
@@ -1101,7 +1101,7 @@ In addition, registering an actor automatically sets up monitoring for the actor
 
 All actors running in a JVM instance are monitored by a [MXBean]({{javadoc}}/actors/ActorsMXBean.html) registered with the name `"com.github.fromage.quasi:type=Actors"`. For details, please consult the [Javadoc]({{javadoc}}/actors/ActorsMXBean.html).
 
-In addition, you can create a an [MXBean]({{javadoc}}/actors/ActorMXBean.html) that monitors a specific actor by calling the actor's [`monitor`]({{javadoc}}/actors/Actor.html#monitor()) method. That MBean will be registered as `"com.github.fromage.quasi:type=quasar,monitor=actor,name=ACTOR_NAME"`.This happens automatically when an actor is registered.
+In addition, you can create a an [MXBean]({{javadoc}}/actors/ActorMXBean.html) that monitors a specific actor by calling the actor's [`monitor`]({{javadoc}}/actors/Actor.html#monitor()) method. That MBean will be registered as `"com.github.fromage.quasi:type=quasi,monitor=actor,name=ACTOR_NAME"`.This happens automatically when an actor is registered.
 
 A monitored actor (either as a result of it being registered or of having called the `monitor` method) can have its MBean removed by calling the [`stopMonitor`]({{javadoc}}/actors/Actor.html#stopMonitor()) method.
 
@@ -1326,14 +1326,14 @@ Unlike plain actors, behaviors can be swapped in without any early consideration
 
 #### Example
 
-A complete hot code swapping example can be found in [this GitHub repository](https://github.com/puniverse/quasar-codeswap-example).
+A complete hot code swapping example can be found in [this GitHub repository](https://github.com/puniverse/quasi-codeswap-example).
 
 ### Quasar-Kotlin Actors
 
 Kotlin's inline higher-order functions and the `when` construct enable a powerful and natural selective receive syntax:
 
 ~~~ kotlin
-{% include_snippet Kotlin Actors example ./quasar-kotlin/src/test/kotlin/co/paralleluniverse/kotlin/actors/PingPong.kt %}
+{% include_snippet Kotlin Actors example ./quasi-kotlin/src/test/kotlin/co/paralleluniverse/kotlin/actors/PingPong.kt %}
 ~~~
 
 This example highlights a few interesting capabilities:
@@ -1389,7 +1389,7 @@ In this version, clustering is pretty rudimentary, but essential features should
 
 ### Enabling Clustering
 
-First, you will need to add the `com.github.fromage.quasi:quasar-galaxy` artifact as a dependency to your project, and set some Galaxy cluster properties. At the very least you will need to set `"galaxy.nodeId"`, which will have to be a different `short` value for each master node. If you're running several nodes on the same machine, you will also need to set `"galaxy.port"` and `"galaxy.slave_port"`. These properties can be set in several ways. The simplest is to define them as JVM system properties (as `-D` command line arguments).However, you can also set them in the Galaxy configuration XML files or in a properties file. Please refer to the [Galaxy documentation](http://docs.paralleluniverse.co/galaxy/) for more detail.
+First, you will need to add the `com.github.fromage.quasi:quasi-galaxy` artifact as a dependency to your project, and set some Galaxy cluster properties. At the very least you will need to set `"galaxy.nodeId"`, which will have to be a different `short` value for each master node. If you're running several nodes on the same machine, you will also need to set `"galaxy.port"` and `"galaxy.slave_port"`. These properties can be set in several ways. The simplest is to define them as JVM system properties (as `-D` command line arguments).However, you can also set them in the Galaxy configuration XML files or in a properties file. Please refer to the [Galaxy documentation](http://docs.paralleluniverse.co/galaxy/) for more detail.
 
 Then, to make an actor discoverable cluster-wide, all you need to do is register it with the [`register`]({{javadoc}}/actors/Actor.html#register()) method of the `Actor` class.
 
@@ -1411,38 +1411,38 @@ Actors that support migration, must implement the (empty) marker interface [`Mig
 
 [Reactive Streams](https://github.com/reactive-streams/reactive-streams-jvm/blob/v1.0.0/README.md) are a new JVM non-JCP standard for an API that facilitates interoperation among various libraries for asynchronous IO streams, including RxJava, Akka Streams, Pivotal Reactor and Quasar. The standard allows code using any of the compliant libraries to interoperate with code written using any of the other.
 
-Quasar's `quasar-reactive-streams` artifact contains a full, TCK-compliant implementation of Reactive Streams, which converts streams to Quasar channels and vice versa. The implementation contains a single public class, `com.github.fromage.quasi.strands.channels.reactivestreams.ReactiveStreams`, with a set of static methods that perform the conversion. The [`ReactiveStreams` class Javadoc]({{javadoc}}/strands/channels/reactivestreams/ReactiveStreams.html)) has all the details.
+Quasar's `quasi-reactive-streams` artifact contains a full, TCK-compliant implementation of Reactive Streams, which converts streams to Quasar channels and vice versa. The implementation contains a single public class, `com.github.fromage.quasi.strands.channels.reactivestreams.ReactiveStreams`, with a set of static methods that perform the conversion. The [`ReactiveStreams` class Javadoc]({{javadoc}}/strands/channels/reactivestreams/ReactiveStreams.html)) has all the details.
 
 ## Examples
 
 For examples of using Quasar, you can take a look at Quasar's test suite.
 
-* [Fiber tests](https://github.com/puniverse/quasar/blob/master/quasar-core/src/test/java/co/paralleluniverse/fibers/FiberTest.java)
-* [FiberAsync tests](https://github.com/puniverse/quasar/blob/master/quasar-core/src/test/java/co/paralleluniverse/fibers/FiberAsyncTest.java)
-* [IO tests](https://github.com/puniverse/quasar/blob/master/quasar-core/src/test/java/co/paralleluniverse/fibers/io/FiberAsyncIOTest.java)
-* [Channel tests](https://github.com/puniverse/quasar/tree/master/quasar-core/src/test/java/co/paralleluniverse/strands/channels)
-* [Actor tests](https://github.com/puniverse/quasar/blob/master/quasar-actors/src/test/java/co/paralleluniverse/actors/ActorTest.java)
-* [Server behavior tests](https://github.com/puniverse/quasar/blob/master/quasar-actors/src/test/java/co/paralleluniverse/actors/behaviors/ServerTest.java)
-* [Proxy server test](https://github.com/puniverse/quasar/blob/master/quasar-actors/src/test/java/co/paralleluniverse/actors/behaviors/ProxyServerTest.java)
-* [EventSource tests](https://github.com/puniverse/quasar/blob/master/quasar-actors/src/test/java/co/paralleluniverse/actors/behaviors/EventSourceTest.java)
-* [Supervisor tests](https://github.com/puniverse/quasar/blob/master/quasar-actors/src/test/java/co/paralleluniverse/actors/behaviors/SupervisorTest.java)
-* [Reactive Streams tests](https://github.com/puniverse/quasar/blob/master/quasar-reactive-streams/src/test/java/co/paralleluniverse/strands/channels/reactivestreams/TwoSidedTest.java)
+* [Fiber tests](https://github.com/puniverse/quasi/blob/master/quasi-core/src/test/java/co/paralleluniverse/fibers/FiberTest.java)
+* [FiberAsync tests](https://github.com/puniverse/quasi/blob/master/quasi-core/src/test/java/co/paralleluniverse/fibers/FiberAsyncTest.java)
+* [IO tests](https://github.com/puniverse/quasi/blob/master/quasi-core/src/test/java/co/paralleluniverse/fibers/io/FiberAsyncIOTest.java)
+* [Channel tests](https://github.com/puniverse/quasi/tree/master/quasi-core/src/test/java/co/paralleluniverse/strands/channels)
+* [Actor tests](https://github.com/puniverse/quasi/blob/master/quasi-actors/src/test/java/co/paralleluniverse/actors/ActorTest.java)
+* [Server behavior tests](https://github.com/puniverse/quasi/blob/master/quasi-actors/src/test/java/co/paralleluniverse/actors/behaviors/ServerTest.java)
+* [Proxy server test](https://github.com/puniverse/quasi/blob/master/quasi-actors/src/test/java/co/paralleluniverse/actors/behaviors/ProxyServerTest.java)
+* [EventSource tests](https://github.com/puniverse/quasi/blob/master/quasi-actors/src/test/java/co/paralleluniverse/actors/behaviors/EventSourceTest.java)
+* [Supervisor tests](https://github.com/puniverse/quasi/blob/master/quasi-actors/src/test/java/co/paralleluniverse/actors/behaviors/SupervisorTest.java)
+* [Reactive Streams tests](https://github.com/puniverse/quasi/blob/master/quasi-reactive-streams/src/test/java/co/paralleluniverse/strands/channels/reactivestreams/TwoSidedTest.java)
 
 ### Distributed Examples
 
-There are a few examples of distributed actors in the [example package](https://github.com/puniverse/quasar/tree/master/quasar-galaxy/src/test/java/co/paralleluniverse/galaxy/example).
+There are a few examples of distributed actors in the [example package](https://github.com/puniverse/quasi/tree/master/quasi-galaxy/src/test/java/co/paralleluniverse/galaxy/example).
 You can run them after cloning the repository.
 
 In order to run the ping pong example, start the Pong actor by:
 
 ~~~ sh
-gradle :quasar-galaxy:run -PmainClass=com.github.fromage.quasi.galaxy.example.pingpong.Pong
+gradle :quasi-galaxy:run -PmainClass=com.github.fromage.quasi.galaxy.example.pingpong.Pong
 ~~~
 
 Start the Ping actor in a different terminal by:
 
 ~~~
-gradle :quasar-galaxy:run -PmainClass=com.github.fromage.quasi.galaxy.example.pingpong.Ping
+gradle :quasi-galaxy:run -PmainClass=com.github.fromage.quasi.galaxy.example.pingpong.Ping
 ~~~
 
 To run the actors on different computers, change the following lines in the build.gradle file to the appropriate network configuration:

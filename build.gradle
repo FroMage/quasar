@@ -25,20 +25,20 @@ subprojects {
     version             = "0.7.10-SNAPSHOT"
     status              = "integration"
     description         = "Fibers for the JVM"
-    ext.url             = "http://puniverse.github.com/quasar"
+    ext.url             = "http://github.com/fromage/quasi"
     ext.vendor          = "Parallel Universe Software Co."
     ext.licenseName1    = "The GNU Lesser General Public License, version 3"
     ext.licenseUrl1     = "http://www.gnu.org/licenses/lgpl-3.0.txt"
     ext.licenseName2    = "Eclipse Public License - v 1.0"
     ext.licenseUrl2     = "http://www.eclipse.org/legal/epl-v10.html"
-    ext.scmUrl          = "https://github.com/puniverse/quasar"
-    ext.scmConnection   = "https://github.com/puniverse/quasar.git"
+    ext.scmUrl          = "https://github.com/fromage/quasi"
+    ext.scmConnection   = "https://github.com/fromage/quasi.git"
     ext.distDir         = "$buildDir/dist"
     ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
     ext.baselib         = "${rootProject.projectDir}/baselib"
     ext.java8 = rootProject.ext.java8
     ext.jdkVer = "8"
-    ext.quasarJar = "${rootProject.projectDir}/quasar-core/build/libs/quasar-core-${version}.jar" // project(':quasar-core').jar.archivePath
+    ext.quasiJar = "${rootProject.projectDir}/quasi-core/build/libs/quasi-core-${version}.jar" // project(':quasi-core').jar.archivePath
 
     ext.asmVer    = '6.2'
 
@@ -130,7 +130,7 @@ subprojects {
 
     compileJava.dependsOn processResources
     compileJava {
-        if (project.name != 'quasar-kotlin') {
+        if (project.name != 'quasi-kotlin') {
             doLast {
                 scanAndInstrument(sourceSets.main, [configurations.provided, configurations.runtime])
             }
@@ -153,11 +153,11 @@ subprojects {
         // systemProperty 'com.github.fromage.quasi.debugMode', 'true'
         systemProperty 'com.github.fromage.quasi.monitoring.flightRecorderLevel', '5'
         systemProperty 'com.github.fromage.quasi.globalFlightRecorder', 'true'
-        systemProperty 'com.github.fromage.quasi.flightRecorderDumpFile', 'quasar.log'
+        systemProperty 'com.github.fromage.quasi.flightRecorderDumpFile', 'quasi.log'
         systemProperty 'com.github.fromage.quasi.monitoring.flightRecorderSize', '200000'
 
-        if (project.name != 'quasar-core') {
-            jvmArgs "-javaagent:${quasarJar}" // =vdmc (verbose, debug, allow monitors, check class)
+        if (project.name != 'quasi-core') {
+            jvmArgs "-javaagent:${quasiJar}" // =vdmc (verbose, debug, allow monitors, check class)
         }
 
         jvmArgs "-Xmx2048m"
@@ -201,7 +201,7 @@ subprojects {
             systemProperty "log4j.configurationFile", "${rootProject.projectDir}/log4j.xml"
             systemProperty "Log4jContextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector"
             // systemProperty 'com.github.fromage.quasi.fibers.verifyInstrumentation', 'true'
-            jvmArgs "-javaagent:${quasarJar}" // =vdmc (verbose, debug, allow monitors, check class)
+            jvmArgs "-javaagent:${quasiJar}" // =vdmc (verbose, debug, allow monitors, check class)
 
             // jvmArgs '-XX:+UnlockCommercialFeatures', '-XX:+FlightRecorder', '-XX:StartFlightRecording=duration=60s,filename=recording.jfr,settings=heap'
         }
@@ -209,7 +209,7 @@ subprojects {
     debug.debug = true
 
     project.afterEvaluate {
-        run.dependsOn project(':quasar-core').tasks["jdk8ShadowJar"]
+        run.dependsOn project(':quasi-core').tasks["jdk8ShadowJar"]
     }
 
     tasks.withType(JavaExec) {
@@ -336,12 +336,12 @@ def scanAndInstrument(sset, configs) {
         classpath: cp)
     ant.instrumentation(verbose:'true', check:'true', debug:'true') {
         fileset(dir: sset.output.classesDir) {
-            exclude(name: 'co/paralleluniverse/fibers/instrument/*.class')
+            exclude(name: 'com/github/fromage/quasi/fibers/instrument/*.class')
         }
     }
 }
 
-project (':quasar-core') {
+project (':quasi-core') {
     /*
      * see:
      *   https://docs.gradle.org/current/userguide/java_plugin.html
@@ -551,14 +551,14 @@ project (':quasar-core') {
 }
 
 task javadoc(type: Javadoc, dependsOn: subprojects.javadoc) {
-    title = "Quasar ${project(':quasar-core').version}"
+    title = "Quasi ${project(':quasi-core').version}"
     destinationDir = file("docs/javadoc")
 
-    source = project(':quasar-core').sourceSets.jdk8.allJava
+    source = project(':quasi-core').sourceSets.jdk8.allJava
 
     classpath = files(subprojects.collect { project -> project.sourceSets.main.compileClasspath })
     options {
-        // docletpath = project(':quasar-core').configurations.markdownDoclet.files.asType(List)
+        // docletpath = project(':quasi-core').configurations.markdownDoclet.files.asType(List)
         // doclet = 'ch.raffael.doclets.pegdown.PegdownDoclet'
         // addStringOption("parse-timeout", "10")
         // stylesheetFile = rootProject.file('./baselib/javadoc.css')
@@ -571,38 +571,38 @@ task javadoc(type: Javadoc, dependsOn: subprojects.javadoc) {
         ]
     }
     excludes = [
-        "co/paralleluniverse/actors/spi/**",
-        "co/paralleluniverse/actors/ActorMonitor.java",
-        "co/paralleluniverse/actors/GlobalRegistry.java",
-        "co/paralleluniverse/actors/JMXActorMonitor.java",
-        "co/paralleluniverse/actors/LifecycleListener.java",
-        "co/paralleluniverse/actors/LifecycleListenerProxy.java",
-        "co/paralleluniverse/actors/MutabilityTester.java",
-        "co/paralleluniverse/actors/RemoteActorProxyFactoryService.java",
-        "co/paralleluniverse/actors/RemoteActorRef.java",
-        "co/paralleluniverse/actors/RemoteActorProxyFactory.java",
-        "co/paralleluniverse/common/benchmark/**",
-        "co/paralleluniverse/common/classloader/**",
-        "co/paralleluniverse/common/logging/**",
-        "co/paralleluniverse/common/monitoring/**",
-        "co/paralleluniverse/common/reflection/**",
-        "co/paralleluniverse/common/test/**",
-        "co/paralleluniverse/common/util/**",
-        "co/paralleluniverse/concurrent/forkjoin/**",
-        "co/paralleluniverse/concurrent/util/**",
-        "co/paralleluniverse/data/record/DynamicGeneratedRecord.java",
-        "co/paralleluniverse/data/record/DynamicRecord.java",
-        "co/paralleluniverse/fibers/DefaultFiberPool.java",
-        "co/paralleluniverse/fibers/FibersMonitor.java",
-        "co/paralleluniverse/fibers/FiberTimedScheduler.java",
-        "co/paralleluniverse/fibers/Instrumented.java",
-        "co/paralleluniverse/fibers/NoopFibersMonitor.java",
-        "co/paralleluniverse/fibers/instrument/**",
-        "co/paralleluniverse/io/serialization/**",
-        "co/paralleluniverse/remote/**",
-        "co/paralleluniverse/strands/channels/SelectActionImpl.java",
-        "co/paralleluniverse/strands/channels/disruptor/**", // not ready
-        "co/paralleluniverse/strands/queues/**",
+        "com/github/fromage/quasi/actors/spi/**",
+        "com/github/fromage/quasi/actors/ActorMonitor.java",
+        "com/github/fromage/quasi/actors/GlobalRegistry.java",
+        "com/github/fromage/quasi/actors/JMXActorMonitor.java",
+        "com/github/fromage/quasi/actors/LifecycleListener.java",
+        "com/github/fromage/quasi/actors/LifecycleListenerProxy.java",
+        "com/github/fromage/quasi/actors/MutabilityTester.java",
+        "com/github/fromage/quasi/actors/RemoteActorProxyFactoryService.java",
+        "com/github/fromage/quasi/actors/RemoteActorRef.java",
+        "com/github/fromage/quasi/actors/RemoteActorProxyFactory.java",
+        "com/github/fromage/quasi/common/benchmark/**",
+        "com/github/fromage/quasi/common/classloader/**",
+        "com/github/fromage/quasi/common/logging/**",
+        "com/github/fromage/quasi/common/monitoring/**",
+        "com/github/fromage/quasi/common/reflection/**",
+        "com/github/fromage/quasi/common/test/**",
+        "com/github/fromage/quasi/common/util/**",
+        "com/github/fromage/quasi/concurrent/forkjoin/**",
+        "com/github/fromage/quasi/concurrent/util/**",
+        "com/github/fromage/quasi/data/record/DynamicGeneratedRecord.java",
+        "com/github/fromage/quasi/data/record/DynamicRecord.java",
+        "com/github/fromage/quasi/fibers/DefaultFiberPool.java",
+        "com/github/fromage/quasi/fibers/FibersMonitor.java",
+        "com/github/fromage/quasi/fibers/FiberTimedScheduler.java",
+        "com/github/fromage/quasi/fibers/Instrumented.java",
+        "com/github/fromage/quasi/fibers/NoopFibersMonitor.java",
+        "com/github/fromage/quasi/fibers/instrument/**",
+        "com/github/fromage/quasi/io/serialization/**",
+        "com/github/fromage/quasi/remote/**",
+        "com/github/fromage/quasi/strands/channels/SelectActionImpl.java",
+        "com/github/fromage/quasi/strands/channels/disruptor/**", // not ready
+        "com/github/fromage/quasi/strands/queues/**",
     ]
 }
 

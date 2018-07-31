@@ -72,7 +72,7 @@ public final class QuasarInstrumentor {
     public boolean shouldInstrument(String className) {
         if (className != null) {
             className = className.replace('.', '/');
-            if (className.startsWith("co/paralleluniverse/fibers/instrument/") && !Debug.isUnitTest())
+            if (className.startsWith("com/github/fromage/quasi/fibers/instrument/") && !Debug.isUnitTest())
                 return false;
             if (className.equals(Classes.FIBER_CLASS_NAME) || className.startsWith(Classes.FIBER_CLASS_NAME + '$'))
                 return false;
@@ -112,7 +112,7 @@ public final class QuasarInstrumentor {
             log(LogLevel.INFO, "TRANSFORM: %s %s", className,
                 (db.getClassEntry(className) != null && db.getClassEntry(className).requiresInstrumentation()) ? "request" : "");
 
-            examine(className, "quasar-1-preinstr", cb);
+            examine(className, "quasi-1-preinstr", cb);
         } else {
             log(LogLevel.INFO, "TRANSFORM: null className");
         }
@@ -124,7 +124,7 @@ public final class QuasarInstrumentor {
         r1.accept(ic1, 0);
         cb = cw1.toByteArray();
 
-        examine(className, "quasar-2", cb);
+        examine(className, "quasi-2", cb);
 
         // Phase 2, instrument, tree API
         final ClassReader r2 = new ClassReader(cb);
@@ -145,7 +145,7 @@ public final class QuasarInstrumentor {
             }
         }
 
-        examine(className, "quasar-4", cb);
+        examine(className, "quasi-4", cb);
 
         // Phase 4, fill suspendable call offsets, event API is enough
         final OffsetClassReader r3 = new OffsetClassReader(cb);
@@ -156,7 +156,7 @@ public final class QuasarInstrumentor {
 
         // DEBUG
         if (EXAMINED_CLASS != null) {
-            examine(className, "quasar-5-final", cb);
+            examine(className, "quasi-5-final", cb);
 
             if (check) {
                 ClassReader r4 = new ClassReader(cb);
