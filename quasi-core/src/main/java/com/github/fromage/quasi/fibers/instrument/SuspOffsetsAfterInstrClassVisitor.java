@@ -20,7 +20,7 @@ import org.objectweb.asm.tree.MethodNode;
 import com.github.fromage.quasi.fibers.Instrumented;
 
 import static com.github.fromage.quasi.fibers.instrument.Classes.*;
-import static com.github.fromage.quasi.fibers.instrument.QuasarInstrumentor.ASMAPI;
+import static com.github.fromage.quasi.fibers.instrument.QuasiInstrumentor.ASMAPI;
 
 import java.util.*;
 

@@ -69,9 +69,9 @@ public class MethodDatabase {
     private final SuspendableClassifier classifier;
     private final NavigableMap<String, ClassEntry> classes;
     private final HashMap<String, String> superClasses;
-    private final QuasarInstrumentor instrumentor;
+    private final QuasiInstrumentor instrumentor;
 
-    public MethodDatabase(QuasarInstrumentor instrumentor, ClassLoader classloader, SuspendableClassifier classifier) {
+    public MethodDatabase(QuasiInstrumentor instrumentor, ClassLoader classloader, SuspendableClassifier classifier) {
         this.instrumentor = instrumentor;
         if (classloader == null)
             throw new NullPointerException("classloader");

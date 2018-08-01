@@ -80,7 +80,7 @@ import org.objectweb.asm.MethodVisitor;
 
 import com.github.fromage.quasi.concurrent.util.MapUtil;
 
-import static com.github.fromage.quasi.fibers.instrument.QuasarInstrumentor.ASMAPI;
+import static com.github.fromage.quasi.fibers.instrument.QuasiInstrumentor.ASMAPI;
 
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
@@ -104,7 +104,7 @@ public class JavaAgent {
             System.err.println("Retransforming classes is not supported!");
 
         final ClassLoader cl = Thread.currentThread().getContextClassLoader();
-        final QuasarInstrumentor instrumentor = new QuasarInstrumentor(false);
+        final QuasiInstrumentor instrumentor = new QuasiInstrumentor(false);
         ACTIVE = true;
         SuspendableHelper.javaAgent = true;
 
@@ -185,9 +185,9 @@ public class JavaAgent {
     }
 
     private static class Transformer implements ClassFileTransformer {
-        private final QuasarInstrumentor instrumentor;
+        private final QuasiInstrumentor instrumentor;
 
-        public Transformer(QuasarInstrumentor instrumentor) {
+        public Transformer(QuasiInstrumentor instrumentor) {
             this.instrumentor = instrumentor;
         }
 

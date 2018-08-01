@@ -39,7 +39,7 @@ import com.github.fromage.quasi.fibers.SuspendExecution;
 import com.github.fromage.quasi.fibers.instrument.Log;
 import com.github.fromage.quasi.fibers.instrument.LogLevel;
 import com.github.fromage.quasi.fibers.instrument.MethodDatabase;
-import com.github.fromage.quasi.fibers.instrument.QuasarInstrumentor;
+import com.github.fromage.quasi.fibers.instrument.QuasiInstrumentor;
 
 import static org.junit.Assert.*;
 
@@ -62,7 +62,7 @@ public class BlockingTest {
         msgs.add("Method BlockingTest.java:" + className + "#t_join2(Ljava/lang/Thread;)V contains potentially blocking call to java/lang/Thread#join(J)V");
         msgs.add("Method BlockingTest.java:" + className + "#t_join3(Ljava/lang/Thread;)V contains potentially blocking call to java/lang/Thread#join(JI)V");
 
-        final QuasarInstrumentor instrumentor = new QuasarInstrumentor(false);
+        final QuasiInstrumentor instrumentor = new QuasiInstrumentor(false);
         final MethodDatabase db = instrumentor.getMethodDatabase(BlockingTest.class.getClassLoader());
         instrumentor.setAllowBlocking(true);
         instrumentor.setLog(new Log() {

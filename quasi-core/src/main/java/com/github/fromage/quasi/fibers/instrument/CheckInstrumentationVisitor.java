@@ -43,7 +43,7 @@ package com.github.fromage.quasi.fibers.instrument;
 
 import static com.github.fromage.quasi.fibers.instrument.Classes.INSTRUMENTED_DESC;
 import static com.github.fromage.quasi.fibers.instrument.Classes.SUSPENDABLE_DESC;
-import static com.github.fromage.quasi.fibers.instrument.QuasarInstrumentor.ASMAPI;
+import static com.github.fromage.quasi.fibers.instrument.QuasiInstrumentor.ASMAPI;
 
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassVisitor;

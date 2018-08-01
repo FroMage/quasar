@@ -42,7 +42,7 @@
 package com.github.fromage.quasi.fibers.instrument;
 
 import static com.github.fromage.quasi.fibers.instrument.Classes.*;
-import static com.github.fromage.quasi.fibers.instrument.QuasarInstrumentor.ASMAPI;
+import static com.github.fromage.quasi.fibers.instrument.QuasiInstrumentor.ASMAPI;
 
 import java.util.ArrayList;
 import java.util.List;

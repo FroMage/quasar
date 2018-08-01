@@ -37,7 +37,7 @@ import java.util.regex.Pattern;
 /**
  * @author pron
  */
-public final class QuasarInstrumentor {
+public final class QuasiInstrumentor {
     @SuppressWarnings("WeakerAccess")
     public static final int ASMAPI = Opcodes.ASM6;
 
@@ -54,11 +54,11 @@ public final class QuasarInstrumentor {
     private boolean debug;
     private int logLevelMask;
 
-    public QuasarInstrumentor() {
+    public QuasiInstrumentor() {
         this(false);
     }
 
-    public QuasarInstrumentor(boolean aot) {
+    public QuasiInstrumentor(boolean aot) {
         this.aot = aot;
         setLogLevelMask();
     }
@@ -188,7 +188,7 @@ public final class QuasarInstrumentor {
             return dbForClassloader.get(loader);
     }
 
-    public QuasarInstrumentor setCheck(boolean check) {
+    public QuasiInstrumentor setCheck(boolean check) {
         this.check = check;
         return this;
     }
@@ -199,7 +199,7 @@ public final class QuasarInstrumentor {
     }
 
     @SuppressWarnings("WeakerAccess")
-    public synchronized QuasarInstrumentor setAllowMonitors(boolean allowMonitors) {
+    public synchronized QuasiInstrumentor setAllowMonitors(boolean allowMonitors) {
         this.allowMonitors = allowMonitors;
         return this;
     }
@@ -210,12 +210,12 @@ public final class QuasarInstrumentor {
     }
 
     @SuppressWarnings("WeakerAccess")
-    public synchronized QuasarInstrumentor setAllowBlocking(boolean allowBlocking) {
+    public synchronized QuasiInstrumentor setAllowBlocking(boolean allowBlocking) {
         this.allowBlocking = allowBlocking;
         return this;
     }
 
-    public synchronized QuasarInstrumentor setLog(Log log) {
+    public synchronized QuasiInstrumentor setLog(Log log) {
         this.log = log;
 //        for (MethodDatabase db : dbForClassloader.values()) {
 //            db.setLog(log);

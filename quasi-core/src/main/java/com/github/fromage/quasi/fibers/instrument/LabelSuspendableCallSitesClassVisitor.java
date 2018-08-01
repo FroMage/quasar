@@ -14,7 +14,7 @@
 package com.github.fromage.quasi.fibers.instrument;
 
 import static com.github.fromage.quasi.fibers.instrument.Classes.isYieldMethod;
-import static com.github.fromage.quasi.fibers.instrument.QuasarInstrumentor.ASMAPI;
+import static com.github.fromage.quasi.fibers.instrument.QuasiInstrumentor.ASMAPI;
 
 import org.objectweb.asm.*;
 import org.objectweb.asm.tree.AbstractInsnNode;

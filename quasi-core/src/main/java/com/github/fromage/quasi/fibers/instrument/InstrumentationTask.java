@@ -124,7 +124,7 @@ public class InstrumentationTask extends Task {
             for (FileSet fs : filesets)
                 urls.add(fs.getDir().toURI().toURL());
             final ClassLoader cl = new URLClassLoader(urls.toArray(new URL[0]), getClass().getClassLoader());
-            final QuasarInstrumentor instrumentor = new QuasarInstrumentor(true);
+            final QuasiInstrumentor instrumentor = new QuasiInstrumentor(true);
 
             instrumentor.setCheck(check);
             instrumentor.setVerbose(verbose);
@@ -184,7 +184,7 @@ public class InstrumentationTask extends Task {
         }
     }
 
-    private void instrumentClass(ClassLoader cl, QuasarInstrumentor instrumentor, WorkListEntry entry) {
+    private void instrumentClass(ClassLoader cl, QuasiInstrumentor instrumentor, WorkListEntry entry) {
         if (!instrumentor.shouldInstrument(entry.name))
             return;
         try {

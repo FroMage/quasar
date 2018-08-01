@@ -35,7 +35,7 @@ import com.github.fromage.quasi.concurrent.util.MapUtil;
  */
 public class Retransform {
     static volatile Instrumentation instrumentation;
-    static volatile QuasarInstrumentor instrumentor;
+    static volatile QuasiInstrumentor instrumentor;
     static volatile Set<WeakReference<ClassLoader>> classLoaders = Collections.newSetFromMap(MapUtil.<WeakReference<ClassLoader>, Boolean>newConcurrentHashMap());
     
     private static final CopyOnWriteArrayList<ClassLoadListener> listeners = new CopyOnWriteArrayList<>();
@@ -56,7 +56,7 @@ public class Retransform {
         return instrumentor.getMethodDatabase(cl);
     }
 
-    public static QuasarInstrumentor getInstrumentor() {
+    public static QuasiInstrumentor getInstrumentor() {
         return instrumentor;
     }
 
