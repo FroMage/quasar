@@ -552,7 +552,7 @@ project (':quasi-core') {
 
 task javadoc(type: Javadoc, dependsOn: subprojects.javadoc) {
     title = "Quasi ${project(':quasi-core').version}"
-    destinationDir = file("docs/javadoc")
+    destinationDir = file("javadoc")
 
     source = project(':quasi-core').sourceSets.jdk8.allJava
 
@@ -607,7 +607,7 @@ task javadoc(type: Javadoc, dependsOn: subprojects.javadoc) {
 }
 
 task clean(dependsOn: subprojects.clean) << {
-    delete 'docs/javadoc'
+    delete 'javadoc'
 }
 
 def capitalize(s) { s[0].toUpperCase() + s[1..-1].toLowerCase() }
