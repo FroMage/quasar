@@ -22,7 +22,7 @@ subprojects {
     }
 
     group               = "com.github.fromage.quasi"
-    version             = "0.7.10-SNAPSHOT"
+    version             = "0.7.10"
     status              = "integration"
     description         = "Fibers for the JVM"
     ext.url             = "http://github.com/fromage/quasi"
@@ -270,6 +270,7 @@ subprojects {
 
     signing {
         required { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives") }
+        useGpgCmd()
         sign configurations.archives
     }
 
